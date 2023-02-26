@@ -47,3 +47,35 @@ parser.add_argument('-p', '--print-freq', default=10, type=int,
                     metavar='N', help='print frequency (default: 10)')
 parser.add_argument('--resume', default='', type=str, metavar='PATH',
                     help='path to latest checkpoint (default: none)')
+parser.add_argument('--seed', default=None, type=int,
+                    help='seed for initializing training. ')
+parser.add_argument('--gpu', default=None, type=int,
+                    help='GPU id to use.')
+
+parser.add_argument('--pretrained', default='', type=str,
+                    help='path to moco pretrained checkpoint')
+parser.add_argument('--finetune-dataset', default='ntu60', type=str,
+                    help='which dataset to use for finetuning')
+
+parser.add_argument('--protocol', default='cross_view', type=str,
+                    help='traiining protocol of ntu')
+
+parser.add_argument('--finetune_skeleton_representation', default='joint', type=str,
+                    help='which skeleton-representation to use for downstream training')
+
+best_acc1 = 0
+
+
+# initilize weight
+def weights_init_gru(model):
+    with torch.no_grad():
+        for child in list(model.children()):
+            print("init ",child)
+            for param in list(child.parameters()):
+                  if param.dim() == 2:
+                        nn.init.xavier_uniform_(param)
+    print('Weight initial finished!')
+
+def load_encoder(model, pretrained):
+    if os.path.isfile(pretrained):
+        print("=> loading checkpoint '{}'".format(pretrained))
