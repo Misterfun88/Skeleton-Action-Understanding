@@ -79,3 +79,36 @@ def weights_init_gru(model):
 def load_encoder(model, pretrained):
     if os.path.isfile(pretrained):
         print("=> loading checkpoint '{}'".format(pretrained))
+        checkpoint = torch.load(pretrained, map_location="cpu")
+
+        # rename pre-trained keys
+        state_dict = checkpoint['state_dict']
+        for k in list(state_dict.keys()):
+            # print(k)
+            if k.startswith('module.'):
+                # remove prefix
+                state_dict[k[len("module."):]] = state_dict[k]
+            # delete renamed or unused k
+            del state_dict[k]
+                
+        msg = model.load_state_dict(state_dict, strict=False)
+        print("message",msg)
+        assert set(msg.missing_keys) == {"fc.weight", "fc.bias"}
+
+        print("=> loaded pre-trained model '{}'".format(pretrained))
+    else:
+        print("=> no checkpoint found at '{}'".format(pretrained))
+
+def load_pretrained(args, model):
+    
+    load_encoder(model,args.pretrained)
+    finetune_encoder = True
+
+    return finetune_encoder
+
+
+
+def main():
+    args = parser.parse_args()
+
+    if args.seed is not None:
