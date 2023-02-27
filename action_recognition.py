@@ -137,3 +137,30 @@ def main_worker(gpu, ngpus_per_node, args):
         print("Use GPU: {} for training".format(args.gpu))
 
     # create model
+
+    # training dataset
+    from options  import options_downstream as options 
+    if args.finetune_dataset== 'ntu60' and args.protocol == 'cross_view':
+        opts = options.opts_ntu_60_cross_view()
+    elif args.finetune_dataset== 'ntu60' and args.protocol == 'cross_subject':
+        opts = options.opts_ntu_60_cross_subject()
+    elif args.finetune_dataset== 'ntu120' and args.protocol == 'cross_setup':
+        opts = options.opts_ntu_120_cross_setup()
+    elif args.finetune_dataset== 'ntu120' and args.protocol == 'cross_subject':
+        opts = options.opts_ntu_120_cross_subject()
+
+
+    model  = Downstream(**opts.encoder_args)
+    print(model)
+    print("options",opts.encoder_args,opts.train_feeder_args,opts.test_feeder_args)
+
+    if args.pretrained:
+        # freeze all layers but the last fc
+        for name, param in model.named_parameters():
+            if not name.startswith('fc'):
+                param.requires_grad = False
+            else:
+                print('params',name)
+        # init the fc layer
+        model.fc.weight.data.normal_(mean=0.0, std=0.01)
+        model.fc.bias.data.zero_()
