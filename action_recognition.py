@@ -164,3 +164,43 @@ def main_worker(gpu, ngpus_per_node, args):
         # init the fc layer
         model.fc.weight.data.normal_(mean=0.0, std=0.01)
         model.fc.bias.data.zero_()
+
+    # load from pre-trained model
+    finetune_encoder = load_pretrained(args, model)
+
+    if args.gpu is not None:
+        model = model.cuda()
+    
+    
+    # define loss function (criterion) and optimizer
+    criterion = nn.CrossEntropyLoss().cuda()
+
+    # optimize only the linear classifier
+    parameters = list(filter(lambda p: p.requires_grad, model.parameters()))
+    if args.pretrained:
+        assert len(parameters) == 2  # fc.weight, fc.bias
+        
+    optimizer = torch.optim.SGD(parameters, args.lr,
+                                momentum=args.momentum,
+                                weight_decay=args.weight_decay)
+    if True:
+          for parm in optimizer.param_groups:
+                    print ("optimize parameters lr",parm['lr'])
+
+    # optionally resume from a checkpoint
+    if args.resume:
+        if os.path.isfile(args.resume):
+            print("=> loading checkpoint '{}'".format(args.resume))
+            if args.gpu is None:
+                checkpoint = torch.load(args.resume)
+            else:
+                # Map model to be loaded to specified single gpu.
+                loc = 'cuda:{}'.format(args.gpu)
+                checkpoint = torch.load(args.resume, map_location=loc)
+            args.start_epoch = checkpoint['epoch']
+            best_acc1 = checkpoint['best_acc1']
+            if args.gpu is not None:
+                # best_acc1 may be from a checkpoint from a different GPU
+                best_acc1 = best_acc1.to(args.gpu)
+            model.load_state_dict(checkpoint['state_dict'])
+            optimizer.load_state_dict(checkpoint['optimizer'])
