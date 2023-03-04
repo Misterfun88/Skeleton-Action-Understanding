@@ -237,3 +237,26 @@ def main_worker(gpu, ngpus_per_node, args):
         train(train_loader, model, criterion, optimizer, epoch, args)
 
         # evaluate on validation set
+        if (epoch+1) % 5 == 0:
+            acc1 = validate(val_loader, model, criterion, args)
+        else:
+            acc1 = 0
+            
+        # remember best acc@1 and save checkpoint
+        is_best = acc1 > best_acc1
+        if is_best:
+            print("found new best accuracy:= ",acc1)
+            best_acc1 = max(acc1, best_acc1)
+
+            # save_checkpoint({
+            #     'epoch': epoch + 1,
+            #     'state_dict': model.state_dict(),
+            #     'best_acc1': best_acc1,
+            #     'optimizer' : optimizer.state_dict(),
+            # }, is_best,filename = args.finetune_dataset + '_' + args.protocol + '_checkpoint.pth.tar' )
+
+        # sanity check 
+        if epoch == args.start_epoch:
+            if finetune_encoder:
+                sanity_check_encoder(model.state_dict(), args.pretrained)
+    print("Final best accuracy",best_acc1)
