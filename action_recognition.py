@@ -260,3 +260,39 @@ def main_worker(gpu, ngpus_per_node, args):
             if finetune_encoder:
                 sanity_check_encoder(model.state_dict(), args.pretrained)
     print("Final best accuracy",best_acc1)
+
+
+def train(train_loader, model, criterion, optimizer, epoch, args):
+    batch_time = AverageMeter('Time', ':6.3f')
+    data_time = AverageMeter('Data', ':6.3f')
+    losses = AverageMeter('Loss', ':.4e')
+    top1 = AverageMeter('Acc@1', ':6.2f')
+    top5 = AverageMeter('Acc@5', ':6.2f')
+    progress = ProgressMeter(
+        len(train_loader),
+        [batch_time, data_time, losses, top1, top5],
+        prefix="Epoch: [{}]".format(epoch))
+
+    """
+    Switch to eval mode:
+    Under the protocol of linear classification on frozen features/models,
+    it is not legitimate to change any part of the pre-trained model.
+    BatchNorm in train mode may revise running mean/std (even if it receives
+    no gradient), which are part of the model parameters too.
+    """
+    model.eval()
+
+    end = time.time()
+    for i, (jt, js, bt, bs, mt, ms, target) in enumerate(train_loader):
+        # measure data loading time
+        data_time.update(time.time() - end)
+
+        if args.gpu is not None:
+            jt = jt.float().cuda(non_blocking=True)
+            js = js.float().cuda(non_blocking=True)
+            bt = bt.float().cuda(non_blocking=True)
+            bs = bs.float().cuda(non_blocking=True)
+            mt = mt.float().cuda(non_blocking=True)
+            ms = ms.float().cuda(non_blocking=True)
+          
+        target = target.cuda(non_blocking=True)
