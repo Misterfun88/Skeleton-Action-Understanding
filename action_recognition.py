@@ -376,3 +376,44 @@ def save_checkpoint(state, is_best, filename='checkpoint.pth.tar'):
     torch.save(state, filename)
     if is_best:
         shutil.copyfile(filename, filename+'model_best.pth.tar')
+
+
+def sanity_check_encoder(state_dict, pretrained_weights):
+    """
+    Linear classifier should not change any weights other than the linear layer.
+    This sanity check asserts nothing wrong happens (e.g., BN stats updated).
+    """
+    print("=> loading '{}' for sanity check".format(pretrained_weights))
+    checkpoint = torch.load(pretrained_weights, map_location="cpu")
+    state_dict_pre = checkpoint['state_dict']
+
+    for k in list(state_dict.keys()):
+        # only ignore fc layer
+        if 'fc.weight' in k or 'fc.bias' in k or k.find('projector') != -1:
+            continue
+
+        # name in pretrained model
+        k_pre = 'module.' + k
+        assert ((state_dict[k].cpu() == state_dict_pre[k_pre]).all()), \
+            '{} is changed in linear classifier training.'.format(k)
+
+    print("=> sanity check passed.")
+
+
+class AverageMeter(object):
+    """Computes and stores the average and current value"""
+    def __init__(self, name, fmt=':f'):
+        self.name = name
+        self.fmt = fmt
+        self.reset()
+
+    def reset(self):
+        self.val = 0
+        self.avg = 0
+        self.sum = 0
+        self.count = 0
+
+    def update(self, val, n=1):
+        self.val = val
+        self.sum += val * n
+        self.count += n
