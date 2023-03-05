@@ -346,3 +346,33 @@ def validate(val_loader, model, criterion, args):
                 mt = mt.float().cuda(non_blocking=True)
                 ms = ms.float().cuda(non_blocking=True)
                 target = target.cuda(non_blocking=True)
+
+            # compute output
+            output = model(jt, js, bt, bs, mt, ms)
+            loss = criterion(output, target)
+
+            # measure accuracy and record loss
+            acc1, acc5 = accuracy(output, target, topk=(1, 5))
+            losses.update(loss.item(), jt.size(0))
+            top1.update(acc1[0], jt.size(0))
+            top5.update(acc5[0], jt.size(0))
+
+            # measure elapsed time
+            batch_time.update(time.time() - end)
+            end = time.time()
+
+            if i % args.print_freq == 0:
+                progress.display(i)
+
+        # TODO: this should also be done with the ProgressMeter
+        print(' * Acc@1 {top1.avg:.3f} Acc@5 {top5.avg:.3f}'
+              .format(top1=top1, top5=top5))
+        
+
+    return top1.avg
+
+
+def save_checkpoint(state, is_best, filename='checkpoint.pth.tar'):
+    torch.save(state, filename)
+    if is_best:
+        shutil.copyfile(filename, filename+'model_best.pth.tar')
