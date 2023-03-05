@@ -296,3 +296,53 @@ def train(train_loader, model, criterion, optimizer, epoch, args):
             ms = ms.float().cuda(non_blocking=True)
           
         target = target.cuda(non_blocking=True)
+
+        # compute output
+        output = model(jt, js, bt, bs, mt, ms)
+
+
+        loss = criterion(output, target)
+
+        # measure accuracy and record loss
+        acc1, acc5 = accuracy(output, target, topk=(1, 5))
+        losses.update(loss.item(), jt.size(0))
+        top1.update(acc1[0], jt.size(0))
+        top5.update(acc5[0], jt.size(0))
+
+        # compute gradient and do SGD step
+        optimizer.zero_grad()
+        loss.backward()
+        optimizer.step()
+
+        # measure elapsed time
+        batch_time.update(time.time() - end)
+        end = time.time()
+
+        if i % args.print_freq == 0:
+            progress.display(i)
+
+
+def validate(val_loader, model, criterion, args):
+    batch_time = AverageMeter('Time', ':6.3f')
+    losses = AverageMeter('Loss', ':.4e')
+    top1 = AverageMeter('Acc@1', ':6.2f')
+    top5 = AverageMeter('Acc@5', ':6.2f')
+    progress = ProgressMeter(
+        len(val_loader),
+        [batch_time, losses, top1, top5],
+        prefix='Test: ')
+
+    # switch to evaluate mode
+    model.eval()
+
+    with torch.no_grad():
+        end = time.time()
+        for i, (jt, js, bt, bs, mt, ms, target) in enumerate(val_loader):
+            if args.gpu is not None:
+                jt = jt.float().cuda(non_blocking=True)
+                js = js.float().cuda(non_blocking=True)
+                bt = bt.float().cuda(non_blocking=True)
+                bs = bs.float().cuda(non_blocking=True)
+                mt = mt.float().cuda(non_blocking=True)
+                ms = ms.float().cuda(non_blocking=True)
+                target = target.cuda(non_blocking=True)
