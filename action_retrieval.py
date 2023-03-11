@@ -42,3 +42,32 @@ parser.add_argument('--lr', '--learning-rate', default=30., type=float,
                     metavar='LR', help='initial learning rate', dest='lr')
 parser.add_argument('--schedule', default=[50, 70, ], nargs='*', type=int,
                     help='learning rate schedule (when to drop lr by a ratio)')
+parser.add_argument('--momentum', default=0.9, type=float, metavar='M',
+                    help='momentum')
+parser.add_argument('--wd', '--weight-decay', default=0., type=float,
+                    metavar='W', help='weight decay (default: 0.)',
+                    dest='weight_decay')
+parser.add_argument('-p', '--print-freq', default=10, type=int,
+                    metavar='N', help='print frequency (default: 10)')
+parser.add_argument('--resume', default='', type=str, metavar='PATH',
+                    help='path to latest checkpoint (default: none)')
+parser.add_argument('--seed', default=None, type=int,
+                    help='seed for initializing training. ')
+parser.add_argument('--gpu', default=None, type=int,
+                    help='GPU id to use.')
+
+parser.add_argument('--pretrained', default='', type=str,
+                    help='path to moco pretrained checkpoint')
+parser.add_argument('--finetune-dataset', default='ntu60', type=str,
+                    help='which dataset to use for finetuning')
+
+parser.add_argument('--protocol', default='cross_view', type=str,
+                    help='traiining protocol of ntu')
+
+
+parser.add_argument('--knn-neighbours', default=1, type=int,
+                    help='number of neighbours used for KNN.')
+
+best_acc1 = 0
+
+# initilize weight
