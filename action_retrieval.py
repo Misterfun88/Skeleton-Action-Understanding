@@ -71,3 +71,36 @@ parser.add_argument('--knn-neighbours', default=1, type=int,
 best_acc1 = 0
 
 # initilize weight
+def weights_init_gru(model):
+    with torch.no_grad():
+        for child in list(model.children()):
+            print("init ", child)
+            for param in list(child.parameters()):
+                if param.dim() == 2:
+                    nn.init.xavier_uniform_(param)
+    print('PC weight initial finished!')
+
+
+def load_pretrained(model, pretrained):
+    if os.path.isfile(pretrained):
+        print("=> loading checkpoint '{}'".format(pretrained))
+        checkpoint = torch.load(pretrained, map_location="cpu")
+
+        # rename pre-trained keys
+        state_dict = checkpoint['state_dict']
+        for k in list(state_dict.keys()):
+            if k.startswith('module.'):
+                # remove prefix
+                state_dict[k[len("module."):]] = state_dict[k]
+            else:
+                pass
+            del state_dict[k]
+
+        msg = model.load_state_dict(state_dict, strict=False)
+        print("message", msg)
+        assert set(msg.missing_keys) == {"fc.weight", "fc.bias"}
+
+        print("=> loaded pre-trained model '{}'".format(pretrained))
+    else:
+        print("=> no checkpoint found at '{}'".format(pretrained))
+
