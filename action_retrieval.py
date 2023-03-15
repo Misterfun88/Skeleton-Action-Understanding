@@ -170,3 +170,38 @@ def test_extract_hidden(model, data_train, data_eval):
 
 class MyAutoDataset(Dataset):
     def __init__(self, data, label):
+
+        self.data = data
+        self.label = label
+        #self.xy = zip(self.data, self.label)
+
+    def __getitem__(self, index):
+        sequence = self.data[index, :]
+        label = self.label[index]
+
+        return sequence, label
+
+    def __len__(self):
+        return len(self.label)
+
+
+def train_autoencoder(hidden_train, hidden_eval, label_train,
+                      label_eval, middle_size, criterion, lambda1, num_epoches):
+    batch_size = 64
+    #auto = autoencoder(hidden_train.shape[1], middle_size).to(device)
+    auto = autoencoder(hidden_train.shape[1], middle_size).cuda()
+    auto_optimizer = optim.Adam(auto.parameters(), lr=0.001)
+    auto_scheduler = optim.lr_scheduler.LambdaLR(auto_optimizer, lr_lambda=lambda1)
+    criterion_auto = nn.MSELoss()
+
+    autodataset = MyAutoDataset(hidden_train, label_train)
+    trainloader = DataLoader(autodataset, batch_size=batch_size, shuffle=True)
+
+    autodataset = MyAutoDataset(hidden_eval, label_eval)
+    evalloader = DataLoader(autodataset, batch_size=batch_size, shuffle=True)
+
+    print("Training autoencoder")
+    for epoch in tqdm(range(num_epoches)):
+        for (data, label) in trainloader:
+            # img, _ = data
+            # img = img.view(img.size(0), -1)
