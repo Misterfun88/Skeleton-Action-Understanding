@@ -139,3 +139,34 @@ def test_extract_hidden(model, data_train, data_eval):
         ms = ms.float().cuda(non_blocking=True)
         
         en_hi = model(jt, js, bt, bs, mt, ms, knn_eval=True)
+         
+        label_train_list.append(label)
+        hidden_array_train_list.append(en_hi[:, :].detach().cpu().numpy())
+        
+    label_train = np.hstack(label_train_list)
+    hidden_array_train = np.vstack(hidden_array_train_list)
+
+    print("Extracting validation features")
+    label_eval_list = []
+    hidden_array_eval_list = []
+    for ith, (jt, js, bt, bs, mt, ms, label) in enumerate(data_eval):
+        jt = jt.float().cuda(non_blocking=True)
+        js = js.float().cuda(non_blocking=True)
+        bt = bt.float().cuda(non_blocking=True)
+        bs = bs.float().cuda(non_blocking=True)
+        mt = mt.float().cuda(non_blocking=True)
+        ms = ms.float().cuda(non_blocking=True)
+
+        en_hi = model(jt, js, bt, bs, mt, ms, knn_eval=True)
+
+        label_eval_list.append(label)
+        hidden_array_eval_list.append(en_hi[:, :].detach().cpu().numpy())
+        
+    label_eval = np.hstack(label_eval_list)
+    hidden_array_eval = np.vstack(hidden_array_eval_list)
+
+    return hidden_array_train, hidden_array_eval, label_train, label_eval
+
+
+class MyAutoDataset(Dataset):
+    def __init__(self, data, label):
