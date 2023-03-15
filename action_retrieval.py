@@ -104,3 +104,38 @@ def load_pretrained(model, pretrained):
     else:
         print("=> no checkpoint found at '{}'".format(pretrained))
 
+
+def knn(data_train, data_test, label_train, label_test, nn=9):
+    label_train = np.asarray(label_train)
+    label_test = np.asarray(label_test)
+    print("Number of KNN Neighbours = ", nn)
+    print("training feature and labels", data_train.shape, len(label_train))
+    print("test feature and labels", data_test.shape, len(label_test))
+
+    Xtr_Norm = preprocessing.normalize(data_train)
+    Xte_Norm = preprocessing.normalize(data_test)
+
+    knn = KNeighborsClassifier(n_neighbors=nn,
+                               metric='cosine',
+                               n_jobs=24)  # , metric='cosine'#'mahalanobis', metric_params={'V': np.cov(data_train)})
+    knn.fit(Xtr_Norm, label_train)
+    pred = knn.predict(Xte_Norm)
+    acc = accuracy_score(pred, label_test)
+
+    return acc
+
+
+def test_extract_hidden(model, data_train, data_eval):
+    model.eval()
+    print("Extracting training features")
+    label_train_list = []
+    hidden_array_train_list = []
+    for ith, (jt, js, bt, bs, mt, ms, label) in enumerate(data_train):
+        jt = jt.float().cuda(non_blocking=True)
+        js = js.float().cuda(non_blocking=True)
+        bt = bt.float().cuda(non_blocking=True)
+        bs = bs.float().cuda(non_blocking=True)
+        mt = mt.float().cuda(non_blocking=True)
+        ms = ms.float().cuda(non_blocking=True)
+        
+        en_hi = model(jt, js, bt, bs, mt, ms, knn_eval=True)
