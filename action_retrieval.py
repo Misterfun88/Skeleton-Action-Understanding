@@ -205,3 +205,39 @@ def train_autoencoder(hidden_train, hidden_eval, label_train,
         for (data, label) in trainloader:
             # img, _ = data
             # img = img.view(img.size(0), -1)
+            # img = Variable(img).cuda()
+            #data = torch.tensor(data.clone().detach(), dtype=torch.float).to(device)
+            # ===================forward=====================
+            data = data.cuda()
+            output, _ = auto(data)
+            loss = criterion(output, data)
+            # ===================backward====================
+            auto_optimizer.zero_grad()
+            loss.backward()
+            auto_optimizer.step()
+            auto_scheduler.step()
+        for (data, label) in evalloader:
+            data = data.cuda()
+            # ===================forward=====================
+            output, _ = auto(data)
+            loss_eval = criterion(output, data)
+        # ===================log========================
+        # if epoch % 200 == 0:
+        #   print('epoch [{}/{}], train loss:{:.4f} eval loass:{:.4f}'
+        #         .format(epoch + 1, num_epoches, loss.item(), loss_eval.item()))
+
+    # extract hidden train
+    count = 0
+    for (data, label) in trainloader:
+        data = data.cuda()
+        _, encoder_output = auto(data)
+
+        if count == 0:
+            np_out_train = encoder_output.detach().cpu().numpy()
+            label_train = label
+        else:
+            label_train = np.hstack((label_train, label))
+            np_out_train = np.vstack((np_out_train, encoder_output.detach().cpu().numpy()))
+        count += 1
+
+    # extract hidden eval
