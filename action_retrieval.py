@@ -271,3 +271,30 @@ class autoencoder(nn.Module):
         )
 
         self.decoder = nn.Sequential(
+            nn.Linear(middle_size, 512),
+            nn.Tanh(),
+            nn.Linear(512, 1024),
+            nn.Tanh(),
+            nn.Linear(1024, input_size),
+        )
+
+    def forward(self, x):
+        middle_x = self.encoder(x)
+        x = self.decoder(middle_x)
+        return x, middle_x
+
+
+def clustering_knn_acc(model, train_loader, eval_loader, criterion, num_epoches=400, middle_size=125, knn_neighbours=1):
+    hi_train, hi_eval, label_train, label_eval = test_extract_hidden(model, train_loader, eval_loader)
+    # print(hi_train.shape)
+
+    train_ae = False
+    if train_ae:
+        def lambda1(ith_epoch): return 0.95 ** (ith_epoch // 50)
+        np_out_train, np_out_eval, au_l_train, au_l_eval = train_autoencoder(hi_train, hi_eval, label_train,
+                                                                            label_eval, middle_size, criterion, lambda1, num_epoches)
+
+        # print(hi_train.shape)
+        knn_acc_1 = knn(hi_train, hi_eval, label_train, label_eval, nn=knn_neighbours)
+        knn_acc_au = knn(np_out_train, np_out_eval, au_l_train, au_l_eval, nn=knn_neighbours)
+    else:
