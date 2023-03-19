@@ -241,3 +241,33 @@ def train_autoencoder(hidden_train, hidden_eval, label_train,
         count += 1
 
     # extract hidden eval
+    count = 0
+    for (data, label) in evalloader:
+        data = data.cuda()
+        _, encoder_output = auto(data)
+
+        if count == 0:
+            np_out_eval = encoder_output.detach().cpu().numpy()
+            label_eval = label
+
+        else:
+            label_eval = np.hstack((label_eval, label))
+            np_out_eval = np.vstack((np_out_eval, encoder_output.detach().cpu().numpy()))
+        count += 1
+
+    return np_out_train, np_out_eval, label_train, label_eval
+
+
+class autoencoder(nn.Module):
+    def __init__(self, input_size, middle_size):
+        super(autoencoder, self).__init__()
+        self.encoder = nn.Sequential(
+            nn.Linear(input_size, 1024),
+            nn.Tanh(),
+            nn.Linear(1024, 512),
+            nn.Tanh(),
+            nn.Linear(512, middle_size),
+            nn.Tanh()
+        )
+
+        self.decoder = nn.Sequential(
