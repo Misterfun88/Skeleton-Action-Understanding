@@ -298,3 +298,33 @@ def clustering_knn_acc(model, train_loader, eval_loader, criterion, num_epoches=
         knn_acc_1 = knn(hi_train, hi_eval, label_train, label_eval, nn=knn_neighbours)
         knn_acc_au = knn(np_out_train, np_out_eval, au_l_train, au_l_eval, nn=knn_neighbours)
     else:
+        knn_acc_1 = knn(hi_train, hi_eval, label_train, label_eval, nn=knn_neighbours)
+        knn_acc_au = knn_acc_1
+
+    return knn_acc_1, knn_acc_au
+
+
+def main():
+    args = parser.parse_args()
+
+    if args.seed is not None:
+        random.seed(args.seed)
+        torch.manual_seed(args.seed)
+        cudnn.deterministic = True
+        warnings.warn('You have chosen to seed training. '
+                      'This will turn on the CUDNN deterministic setting, '
+                      'which can slow down your training considerably! '
+                      'You may see unexpected behavior when restarting '
+                      'from checkpoints.')
+
+    if args.gpu is not None:
+        warnings.warn('You have chosen a specific GPU. This will completely '
+                      'disable data parallelism.')
+
+    ngpus_per_node = torch.cuda.device_count()
+    # Simply call main_worker function
+    main_worker(0, ngpus_per_node, args)
+
+
+def main_worker(gpu, ngpus_per_node, args):
+    global best_acc1
