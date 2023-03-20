@@ -328,3 +328,35 @@ def main():
 
 def main_worker(gpu, ngpus_per_node, args):
     global best_acc1
+    args.gpu = gpu
+
+    if args.gpu is not None:
+        print("Use GPU: {} for training".format(args.gpu))
+
+    # training dataset
+    from options import options_downstream as options
+    if args.finetune_dataset == 'ntu60' and args.protocol == 'cross_view':
+        opts = options.opts_ntu_60_cross_view()
+    elif args.finetune_dataset == 'ntu60' and args.protocol == 'cross_subject':
+        opts = options.opts_ntu_60_cross_subject()
+    elif args.finetune_dataset == 'ntu120' and args.protocol == 'cross_setup':
+        opts = options.opts_ntu_120_cross_setup()
+    elif args.finetune_dataset == 'ntu120' and args.protocol == 'cross_subject':
+        opts = options.opts_ntu_120_cross_subject()
+  
+  
+    # create model
+    print("=> creating model")
+
+    model  = Downstream(**opts.encoder_args)
+    print(model)
+    print("options",opts.encoder_args,opts.train_feeder_args,opts.test_feeder_args)
+    
+
+    if args.pretrained:
+        # freeze all layers
+        for name, param in model.named_parameters():
+            param.requires_grad = False
+
+    # load from pre-trained  model
+    load_pretrained(model, args.pretrained)
