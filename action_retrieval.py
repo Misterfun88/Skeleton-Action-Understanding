@@ -360,3 +360,37 @@ def main_worker(gpu, ngpus_per_node, args):
 
     # load from pre-trained  model
     load_pretrained(model, args.pretrained)
+
+    model = model.cuda()
+        
+
+    # cudnn.benchmark = True
+
+    # Data loading code
+
+    train_dataset = get_finetune_training_set(opts)
+    val_dataset = get_finetune_validation_set(opts)
+
+    train_sampler = None
+    train_loader = torch.utils.data.DataLoader(
+        train_dataset, batch_size=args.batch_size, shuffle=(
+            train_sampler is None),
+        num_workers=args.workers, pin_memory=True, sampler=train_sampler, drop_last=False)
+
+    val_loader = torch.utils.data.DataLoader(
+        val_dataset,
+        batch_size=args.batch_size, shuffle=False,
+        num_workers=args.workers, pin_memory=True, drop_last=False)
+
+    auto_criterion = nn.MSELoss()
+    # Extract frozen features of  the  pre-trained query encoder
+    # train and evaluate a KNN  classifier on extracted features
+    acc1, acc_au = clustering_knn_acc(model, train_loader, val_loader,
+                                      criterion=auto_criterion,
+                                      knn_neighbours=args.knn_neighbours)
+
+    print(" Knn Without AE= ", acc1, " Knn With AE=", acc_au)
+
+
+if __name__ == '__main__':
+    main()
