@@ -5,4 +5,5 @@ import sys
 from numpy.lib.format import open_memmap
 
 sys.path.extend(['../'])
-from data_gen.p
+from data_gen.preprocess import pre_normalization
+
