@@ -14,3 +14,4 @@ training_subjects = [
 
 # ntu 120
 training_subjects = [
+    1, 2, 4, 5, 8, 9, 
