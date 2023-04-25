@@ -22,4 +22,6 @@ training_setups = [ 2, 4,  6, 8, 10, 12, 14,  16,  18,  20, 22, 24, 26, 28, 30, 
 
 training_cameras = [2, 3]
 max_body_true = 2
-max_body_
+max_body_kinect = 4
+num_joint = 25
+max_
