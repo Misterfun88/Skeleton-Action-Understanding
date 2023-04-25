@@ -24,4 +24,9 @@ training_cameras = [2, 3]
 max_body_true = 2
 max_body_kinect = 4
 num_joint = 25
-max_
+max_frame = 300
+
+import numpy as np
+import os
+
+
