@@ -31,4 +31,5 @@ import os
 
 
 def read_skeleton_filter(file):
-    w
+    with open(file, 'r') as f:
+        
