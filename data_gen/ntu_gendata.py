@@ -32,4 +32,5 @@ import os
 
 def read_skeleton_filter(file):
     with open(file, 'r') as f:
-        
+        skeleton_sequence = {}
+        ske
