@@ -33,4 +33,5 @@ import os
 def read_skeleton_filter(file):
     with open(file, 'r') as f:
         skeleton_sequence = {}
-        skeleton_sequence['numFrame'] = int(f.
+        skeleton_sequence['numFrame'] = int(f.readline())
+        skeleton_
