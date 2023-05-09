@@ -38,4 +38,4 @@ def read_skeleton_filter(file):
         # num_body = 0
         for t in range(skeleton_sequence['numFrame']):
             frame_info = {}
-            
+            frame_info['numBody'] = int
