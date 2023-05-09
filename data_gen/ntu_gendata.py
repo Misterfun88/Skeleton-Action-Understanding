@@ -41,4 +41,4 @@ def read_skeleton_filter(file):
             frame_info['numBody'] = int(f.readline())
             frame_info['bodyInfo'] = []
 
-         
+            for m in range(fra
