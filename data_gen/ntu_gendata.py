@@ -44,4 +44,5 @@ def read_skeleton_filter(file):
             for m in range(frame_info['numBody']):
                 body_info = {}
                 body_info_key = [
-                    'bodyID', 'clipedEdges', 'handLe
+                    'bodyID', 'clipedEdges', 'handLeftConfidence',
+         
