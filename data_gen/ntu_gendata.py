@@ -45,4 +45,4 @@ def read_skeleton_filter(file):
                 body_info = {}
                 body_info_key = [
                     'bodyID', 'clipedEdges', 'handLeftConfidence',
-                    'handLeftState'
+                    'handLeftState', 'handRightConfidence', 'handRig
