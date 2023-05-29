@@ -48,4 +48,5 @@ def read_skeleton_filter(file):
                     'handLeftState', 'handRightConfidence', 'handRightState',
                     'isResticted', 'leanX', 'leanY', 'trackingState'
                 ]
-   
+                body_info = {
+  
