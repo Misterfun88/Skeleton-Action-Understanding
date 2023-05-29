@@ -46,4 +46,6 @@ def read_skeleton_filter(file):
                 body_info_key = [
                     'bodyID', 'clipedEdges', 'handLeftConfidence',
                     'handLeftState', 'handRightConfidence', 'handRightState',
-                    'isResticted', 'leanX', 'lean
+                    'isResticted', 'leanX', 'leanY', 'trackingState'
+                ]
+   
