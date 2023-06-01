@@ -49,4 +49,4 @@ def read_skeleton_filter(file):
                     'isResticted', 'leanX', 'leanY', 'trackingState'
                 ]
                 body_info = {
-  
+                    k: float(v)
