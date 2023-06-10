@@ -52,4 +52,4 @@ def read_skeleton_filter(file):
                     k: float(v)
                     for k, v in zip(body_info_key, f.readline().split())
                 }
-                bo
+                body_info['numJoint'] = int(f.readline()
