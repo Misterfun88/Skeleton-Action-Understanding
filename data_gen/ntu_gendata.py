@@ -51,4 +51,5 @@ def read_skeleton_filter(file):
                 body_info = {
                     k: float(v)
                     for k, v in zip(body_info_key, f.readline().split())
-        
+                }
+                bo
