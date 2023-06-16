@@ -55,4 +55,5 @@ def read_skeleton_filter(file):
                 body_info['numJoint'] = int(f.readline())
                 body_info['jointInfo'] = []
                 for v in range(body_info['numJoint']):
-                    joint_info_
+                    joint_info_key = [
+                        '
