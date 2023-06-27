@@ -57,4 +57,5 @@ def read_skeleton_filter(file):
                 for v in range(body_info['numJoint']):
                     joint_info_key = [
                         'x', 'y', 'z', 'depthX', 'depthY', 'colorX', 'colorY',
-                        'orientationW', 'orientationX', 'orientat
+                        'orientationW', 'orientationX', 'orientationY',
+                        
