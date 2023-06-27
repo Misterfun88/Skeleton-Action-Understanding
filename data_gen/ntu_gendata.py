@@ -58,4 +58,5 @@ def read_skeleton_filter(file):
                     joint_info_key = [
                         'x', 'y', 'z', 'depthX', 'depthY', 'colorX', 'colorY',
                         'orientationW', 'orientationX', 'orientationY',
-                        
+                        'orientationZ', 'trackingState'
+       
