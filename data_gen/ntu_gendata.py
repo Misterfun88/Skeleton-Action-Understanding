@@ -59,4 +59,5 @@ def read_skeleton_filter(file):
                         'x', 'y', 'z', 'depthX', 'depthY', 'colorX', 'colorY',
                         'orientationW', 'orientationX', 'orientationY',
                         'orientationZ', 'trackingState'
-       
+                    ]
+           
