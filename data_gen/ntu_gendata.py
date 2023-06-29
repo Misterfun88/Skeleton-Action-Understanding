@@ -60,4 +60,5 @@ def read_skeleton_filter(file):
                         'orientationW', 'orientationX', 'orientationY',
                         'orientationZ', 'trackingState'
                     ]
-           
+                    joint_info = {
+      
