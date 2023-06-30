@@ -61,4 +61,4 @@ def read_skeleton_filter(file):
                         'orientationZ', 'trackingState'
                     ]
                     joint_info = {
-      
+                        k: float(
