@@ -62,4 +62,5 @@ def read_skeleton_filter(file):
                     ]
                     joint_info = {
                         k: float(v)
-                        for k, v in zip(joint_info_key, f.rea
+                        for k, v in zip(joint_info_key, f.readline().split())
+                  
