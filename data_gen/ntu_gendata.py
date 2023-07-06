@@ -71,4 +71,5 @@ def read_skeleton_filter(file):
     return skeleton_sequence
 
 
-def get_nonzero_std(s
+def get_nonzero_std(s):  # tvc
+    index = s.sum(-1).sum(-1
