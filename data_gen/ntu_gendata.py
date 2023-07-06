@@ -68,4 +68,7 @@ def read_skeleton_filter(file):
                 frame_info['bodyInfo'].append(body_info)
             skeleton_sequence['frameInfo'].append(frame_info)
 
-    return skel
+    return skeleton_sequence
+
+
+def get_nonzero_std(s
