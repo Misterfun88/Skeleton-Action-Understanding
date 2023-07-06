@@ -65,4 +65,4 @@ def read_skeleton_filter(file):
                         for k, v in zip(joint_info_key, f.readline().split())
                     }
                     body_info['jointInfo'].append(joint_info)
- 
+                frame_info['bodyInfo'].append(
