@@ -72,4 +72,6 @@ def read_skeleton_filter(file):
 
 
 def get_nonzero_std(s):  # tvc
-    index = s.sum(-1).sum(-1) != 0  # select valid fr
+    index = s.sum(-1).sum(-1) != 0  # select valid frames
+    s = s[index]
+    if
