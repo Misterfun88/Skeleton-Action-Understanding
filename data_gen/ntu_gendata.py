@@ -66,4 +66,6 @@ def read_skeleton_filter(file):
                     }
                     body_info['jointInfo'].append(joint_info)
                 frame_info['bodyInfo'].append(body_info)
-            skeleton_sequence['frameInfo'].appen
+            skeleton_sequence['frameInfo'].append(frame_info)
+
+    return skel
