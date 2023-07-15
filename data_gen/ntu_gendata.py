@@ -81,4 +81,5 @@ def get_nonzero_std(s):  # tvc
     return s
 
 
-def read_xyz(file, ma
+def read_xyz(file, max_body=4, num_joint=25):  # 取了前两个body
+ 
