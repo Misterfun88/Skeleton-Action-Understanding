@@ -78,4 +78,7 @@ def get_nonzero_std(s):  # tvc
         s = s[:, :, 0].std() + s[:, :, 1].std() + s[:, :, 2].std()  # three channels
     else:
         s = 0
-    ret
+    return s
+
+
+def read_xyz(file, ma
