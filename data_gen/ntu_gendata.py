@@ -76,4 +76,6 @@ def get_nonzero_std(s):  # tvc
     s = s[index]
     if len(s) != 0:
         s = s[:, :, 0].std() + s[:, :, 1].std() + s[:, :, 2].std()  # three channels
-  
+    else:
+        s = 0
+    ret
