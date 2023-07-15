@@ -83,4 +83,4 @@ def get_nonzero_std(s):  # tvc
 
 def read_xyz(file, max_body=4, num_joint=25):  # 取了前两个body
     seq_info = read_skeleton_filter(file)
-    data 
+    data = np.zeros((max_body, seq_info['numFra
