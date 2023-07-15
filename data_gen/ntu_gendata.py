@@ -75,4 +75,5 @@ def get_nonzero_std(s):  # tvc
     index = s.sum(-1).sum(-1) != 0  # select valid frames
     s = s[index]
     if len(s) != 0:
-        s = s[:, :, 0].std() + s[:, :, 1].std() + s[:, :,
+        s = s[:, :, 0].std() + s[:, :, 1].std() + s[:, :, 2].std()  # three channels
+  
