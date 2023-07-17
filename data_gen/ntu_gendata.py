@@ -87,4 +87,4 @@ def read_xyz(file, max_body=4, num_joint=25):  # 取了前两个body
     for n, f in enumerate(seq_info['frameInfo']):
         for m, b in enumerate(f['bodyInfo']):
             for j, v in enumerate(b['jointInfo']):
-                if m <
+                if m < max_body and j < num_joint:
