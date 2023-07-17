@@ -86,4 +86,4 @@ def read_xyz(file, max_body=4, num_joint=25):  # 取了前两个body
     data = np.zeros((max_body, seq_info['numFrame'], num_joint, 3))
     for n, f in enumerate(seq_info['frameInfo']):
         for m, b in enumerate(f['bodyInfo']):
-          
+            for j, v in enumerate(b['joint
