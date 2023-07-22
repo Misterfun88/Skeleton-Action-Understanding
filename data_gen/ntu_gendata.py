@@ -89,4 +89,5 @@ def read_xyz(file, max_body=4, num_joint=25):  # 取了前两个body
             for j, v in enumerate(b['jointInfo']):
                 if m < max_body and j < num_joint:
                     data[m, n, j, :] = [v['x'], v['y'], v['z']]
- 
+                else:
+           
