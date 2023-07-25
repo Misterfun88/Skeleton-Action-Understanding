@@ -92,4 +92,5 @@ def read_xyz(file, max_body=4, num_joint=25):  # 取了前两个body
                 else:
                     pass
 
-    # sele
+    # select two max energy body
+    energy = n
