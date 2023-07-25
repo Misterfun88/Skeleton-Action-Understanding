@@ -93,4 +93,5 @@ def read_xyz(file, max_body=4, num_joint=25):  # 取了前两个body
                     pass
 
     # select two max energy body
-    energy = np.array([get_nonzero_std(x) fo
+    energy = np.array([get_nonzero_std(x) for x in data])
+    index = en
