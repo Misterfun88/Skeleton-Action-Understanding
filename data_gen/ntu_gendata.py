@@ -97,4 +97,8 @@ def read_xyz(file, max_body=4, num_joint=25):  # 取了前两个body
     index = energy.argsort()[::-1][0:max_body_true]
     data = data[index]
 
-    data = data.transpose(3, 1, 
+    data = data.transpose(3, 1, 2, 0)
+    return data
+
+
+def gendata(
