@@ -101,4 +101,4 @@ def read_xyz(file, max_body=4, num_joint=25):  # 取了前两个body
     return data
 
 
-def gendata(
+def gendata(data_path, out_path, ignored_sample_
