@@ -102,4 +102,4 @@ def read_xyz(file, max_body=4, num_joint=25):  # 取了前两个body
 
 
 def gendata(data_path, out_path, ignored_sample_path=None, benchmark='xview', part='eval'):
-    Bone = [(1, 2), (2, 21), (3, 21), (4, 3),
+    Bone = [(1, 2), (2, 21), (3, 21), (4, 3), (5, 21), (6, 5), (7, 6), (8, 7), (
