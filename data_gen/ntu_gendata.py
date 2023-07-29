@@ -107,4 +107,4 @@ def gendata(data_path, out_path, ignored_sample_path=None, benchmark='xview', pa
                      (18, 17), (19, 18), (20, 19), (21, 21), (22, 23), (23, 8), (24, 25), (25, 12)]
     
     if ignored_sample_path != None:
-  
+        with open(ignored_sample_
