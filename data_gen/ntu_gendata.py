@@ -108,4 +108,5 @@ def gendata(data_path, out_path, ignored_sample_path=None, benchmark='xview', pa
     
     if ignored_sample_path != None:
         with open(ignored_sample_path, 'r') as f:
-            i
+            ignored_samples = [
+             
