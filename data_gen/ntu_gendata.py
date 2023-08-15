@@ -110,4 +110,6 @@ def gendata(data_path, out_path, ignored_sample_path=None, benchmark='xview', pa
         with open(ignored_sample_path, 'r') as f:
             ignored_samples = [
                 line.strip() + '.skeleton' for line in f.readlines()
-          
+            ]
+    else:
+        ignored_samples = []
