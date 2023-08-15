@@ -118,4 +118,5 @@ def gendata(data_path, out_path, ignored_sample_path=None, benchmark='xview', pa
     for filename in os.listdir(data_path):
         if filename in ignored_samples:
             continue
-        action_class = int
+        action_class = int(
+            filename[filename.find('A
