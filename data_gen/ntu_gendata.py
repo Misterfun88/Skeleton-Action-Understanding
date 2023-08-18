@@ -119,4 +119,5 @@ def gendata(data_path, out_path, ignored_sample_path=None, benchmark='xview', pa
         if filename in ignored_samples:
             continue
         action_class = int(
-            filename[filename.find('A') + 1:filename.find('A
+            filename[filename.find('A') + 1:filename.find('A') + 4])
+        subject_
