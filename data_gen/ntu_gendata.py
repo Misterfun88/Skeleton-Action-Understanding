@@ -125,4 +125,6 @@ def gendata(data_path, out_path, ignored_sample_path=None, benchmark='xview', pa
         camera_id = int(
             filename[filename.find('C') + 1:filename.find('C') + 4])
         setup_id = int(
-            filename[filename.find('S') + 1:filename.find('
+            filename[filename.find('S') + 1:filename.find('S') + 4])
+
+        if benchmark == 'x
