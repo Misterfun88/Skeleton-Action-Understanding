@@ -127,4 +127,5 @@ def gendata(data_path, out_path, ignored_sample_path=None, benchmark='xview', pa
         setup_id = int(
             filename[filename.find('S') + 1:filename.find('S') + 4])
 
-        if benchmark == 'x
+        if benchmark == 'xview':
+            istraining =
