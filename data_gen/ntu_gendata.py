@@ -122,4 +122,5 @@ def gendata(data_path, out_path, ignored_sample_path=None, benchmark='xview', pa
             filename[filename.find('A') + 1:filename.find('A') + 4])
         subject_id = int(
             filename[filename.find('P') + 1:filename.find('P') + 4])
-        camera_id = in
+        camera_id = int(
+            filename[filen
