@@ -128,4 +128,5 @@ def gendata(data_path, out_path, ignored_sample_path=None, benchmark='xview', pa
             filename[filename.find('S') + 1:filename.find('S') + 4])
 
         if benchmark == 'xview':
-            istraining = (camera_id in training_cameras
+            istraining = (camera_id in training_cameras)
+        elif benchm
