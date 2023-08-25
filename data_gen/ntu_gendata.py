@@ -130,4 +130,4 @@ def gendata(data_path, out_path, ignored_sample_path=None, benchmark='xview', pa
         if benchmark == 'xview':
             istraining = (camera_id in training_cameras)
         elif benchmark == 'xsub':
-            istraining =
+            istraining = (subject_id in training_subject
