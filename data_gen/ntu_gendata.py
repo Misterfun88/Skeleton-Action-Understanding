@@ -134,4 +134,6 @@ def gendata(data_path, out_path, ignored_sample_path=None, benchmark='xview', pa
         elif benchmark == 'xsetup':
             istraining = (setup_id in training_setups)
         else:
-          
+            raise ValueError()
+
+      
