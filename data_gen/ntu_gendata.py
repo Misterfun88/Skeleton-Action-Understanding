@@ -137,4 +137,5 @@ def gendata(data_path, out_path, ignored_sample_path=None, benchmark='xview', pa
             raise ValueError()
 
         if part == 'train':
-           
+            issample = istraining
+        el
