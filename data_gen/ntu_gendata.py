@@ -138,4 +138,5 @@ def gendata(data_path, out_path, ignored_sample_path=None, benchmark='xview', pa
 
         if part == 'train':
             issample = istraining
-        el
+        elif part == 'val':
+            issample 
