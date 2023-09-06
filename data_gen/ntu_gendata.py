@@ -143,4 +143,5 @@ def gendata(data_path, out_path, ignored_sample_path=None, benchmark='xview', pa
         else:
             raise ValueError()
 
-        if issa
+        if issample:
+            sample_name.append(fi
