@@ -148,4 +148,4 @@ def gendata(data_path, out_path, ignored_sample_path=None, benchmark='xview', pa
             sample_label.append(action_class - 1)
 
     with open('{}/{}_label.pkl'.format(out_path, part), 'wb') as f:
-       
+        pickle.dump((sample_name, list(s
