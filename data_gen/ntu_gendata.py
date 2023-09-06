@@ -151,4 +151,4 @@ def gendata(data_path, out_path, ignored_sample_path=None, benchmark='xview', pa
         pickle.dump((sample_name, list(sample_label)), f)
 
     fl = open_memmap(
-        '{}/{}_num_
+        '{}/{}_num_frame.npy'.format(out_path, pa
