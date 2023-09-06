@@ -147,4 +147,4 @@ def gendata(data_path, out_path, ignored_sample_path=None, benchmark='xview', pa
             sample_name.append(filename)
             sample_label.append(action_class - 1)
 
-    with 
+    with open('{}/{}_label.pkl'.format(o
