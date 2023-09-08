@@ -154,4 +154,6 @@ def gendata(data_path, out_path, ignored_sample_path=None, benchmark='xview', pa
         '{}/{}_num_frame.npy'.format(out_path, part),
         dtype='int',
         mode='w+',
-        shape=(len(sa
+        shape=(len(sample_label),))
+
+    fp = np.zeros
