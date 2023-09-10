@@ -156,4 +156,6 @@ def gendata(data_path, out_path, ignored_sample_path=None, benchmark='xview', pa
         mode='w+',
         shape=(len(sample_label),))
 
-    fp = np.zeros((len(sample_label), 3, max_frame, num_joint, max_body
+    fp = np.zeros((len(sample_label), 3, max_frame, num_joint, max_body_true), dtype=np.float32)
+
+    for i, s in 
