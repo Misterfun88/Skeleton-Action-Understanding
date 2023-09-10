@@ -158,4 +158,5 @@ def gendata(data_path, out_path, ignored_sample_path=None, benchmark='xview', pa
 
     fp = np.zeros((len(sample_label), 3, max_frame, num_joint, max_body_true), dtype=np.float32)
 
-    for i, s in 
+    for i, s in enumerate(tqdm(sample_name)):
+  
