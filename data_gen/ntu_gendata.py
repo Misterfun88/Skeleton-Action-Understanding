@@ -160,4 +160,5 @@ def gendata(data_path, out_path, ignored_sample_path=None, benchmark='xview', pa
 
     for i, s in enumerate(tqdm(sample_name)):
         data = read_xyz(os.path.join(data_path, s), max_body=max_body_kinect, num_joint=num_joint)
-        fp[i, :, 0:data.sh
+        fp[i, :, 0:data.shape[1], :, :] = data
+        fl[i] = d
