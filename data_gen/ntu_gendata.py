@@ -162,4 +162,5 @@ def gendata(data_path, out_path, ignored_sample_path=None, benchmark='xview', pa
         data = read_xyz(os.path.join(data_path, s), max_body=max_body_kinect, num_joint=num_joint)
         fp[i, :, 0:data.shape[1], :, :] = data
         fl[i] = data.shape[1] # num_frame
- 
+    
+    motion = np.zeros_
