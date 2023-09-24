@@ -164,4 +164,4 @@ def gendata(data_path, out_path, ignored_sample_path=None, benchmark='xview', pa
         fl[i] = data.shape[1] # num_frame
     
     motion = np.zeros_like(fp)
-    motion[:, :, :-1, :, :
+    motion[:, :, :-1, :, :] = fp[:, :, 1:, :
