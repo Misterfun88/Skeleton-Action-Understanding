@@ -167,4 +167,4 @@ def gendata(data_path, out_path, ignored_sample_path=None, benchmark='xview', pa
     motion[:, :, :-1, :, :] = fp[:, :, 1:, :, :] - fp[:, :, :-1, :, :]
     bone = np.zeros_like(fp)
     for v1, v2 in Bone:
-        bone[:, 
+        bone[:, :, :, v1 - 1, :] = fp[:, :, :, v
