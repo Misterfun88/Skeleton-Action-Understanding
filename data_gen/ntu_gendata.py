@@ -170,4 +170,4 @@ def gendata(data_path, out_path, ignored_sample_path=None, benchmark='xview', pa
         bone[:, :, :, v1 - 1, :] = fp[:, :, :, v1 - 1, :] - fp[:, :, :, v2 - 1, :]
     
     fp = pre_normalization(fp)
-    np
+    np.save('{}/{}_data_joint.npy'.format(
