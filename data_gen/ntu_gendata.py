@@ -168,3 +168,6 @@ def gendata(data_path, out_path, ignored_sample_path=None, benchmark='xview', pa
     bone = np.zeros_like(fp)
     for v1, v2 in Bone:
         bone[:, :, :, v1 - 1, :] = fp[:, :, :, v1 - 1, :] - fp[:, :, :, v2 - 1, :]
+    
+    fp = pre_normalization(fp)
+    np
