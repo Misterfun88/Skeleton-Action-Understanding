@@ -172,4 +172,7 @@ def gendata(data_path, out_path, ignored_sample_path=None, benchmark='xview', pa
     fp = pre_normalization(fp)
     np.save('{}/{}_data_joint.npy'.format(out_path, part), fp)
     np.save('{}/{}_data_motion.npy'.format(out_path, part), motion)
-    np.save('{}/{}_data_bone.npy'.format(
+    np.save('{}/{}_data_bone.npy'.format(out_path, part), bone)
+
+
+if __name_
