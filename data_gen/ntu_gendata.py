@@ -175,4 +175,5 @@ def gendata(data_path, out_path, ignored_sample_path=None, benchmark='xview', pa
     np.save('{}/{}_data_bone.npy'.format(out_path, part), bone)
 
 
-if __name_
+if __name__ == '__main__':
+    pa
