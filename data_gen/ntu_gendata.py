@@ -176,4 +176,4 @@ def gendata(data_path, out_path, ignored_sample_path=None, benchmark='xview', pa
 
 
 if __name__ == '__main__':
-    pa
+    parser = argparse.ArgumentParser(
