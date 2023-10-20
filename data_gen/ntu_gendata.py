@@ -180,4 +180,4 @@ if __name__ == '__main__':
     
     # parser = argparse.ArgumentParser(description='NTU-RGB-D Data Converter.')
     # parser.add_argument('--data_path', default='../data/nturgbd_raw/nturgb+d_skeletons/')
-  
+    # parser.add_argument('--ignore
