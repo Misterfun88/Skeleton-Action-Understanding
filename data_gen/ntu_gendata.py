@@ -182,4 +182,5 @@ if __name__ == '__main__':
     # parser.add_argument('--data_path', default='../data/nturgbd_raw/nturgb+d_skeletons/')
     # parser.add_argument('--ignored_sample_path',
     #                     default='../data/nturgbd_raw/samples_with_missing_skeletons.txt')
-    # parser.add_argument('--out_folder', default='../data/NTU-R
+    # parser.add_argument('--out_folder', default='../data/NTU-RGB-D-60-AGCN/')
+    # benchm
