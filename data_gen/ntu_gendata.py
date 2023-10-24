@@ -183,4 +183,6 @@ if __name__ == '__main__':
     # parser.add_argument('--ignored_sample_path',
     #                     default='../data/nturgbd_raw/samples_with_missing_skeletons.txt')
     # parser.add_argument('--out_folder', default='../data/NTU-RGB-D-60-AGCN/')
-    # benchm
+    # benchmark = ['xsub', 'xview']
+
+    pa
