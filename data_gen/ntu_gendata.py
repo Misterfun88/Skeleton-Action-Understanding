@@ -185,4 +185,4 @@ if __name__ == '__main__':
     # parser.add_argument('--out_folder', default='../data/NTU-RGB-D-60-AGCN/')
     # benchmark = ['xsub', 'xview']
 
-    pa
+    parser.add_argument('--data_path', 
