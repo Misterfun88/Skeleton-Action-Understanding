@@ -185,4 +185,5 @@ if __name__ == '__main__':
     # parser.add_argument('--out_folder', default='../data/NTU-RGB-D-60-AGCN/')
     # benchmark = ['xsub', 'xview']
 
-    parser.add_argument('--data_path', default='../data/nturgbd_raw_120/nturgb+d_skeletons/'
+    parser.add_argument('--data_path', default='../data/nturgbd_raw_120/nturgb+d_skeletons/')
+    parser.add_argument('--
