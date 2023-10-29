@@ -187,4 +187,5 @@ if __name__ == '__main__':
 
     parser.add_argument('--data_path', default='../data/nturgbd_raw_120/nturgb+d_skeletons/')
     parser.add_argument('--ignored_sample_path',
-                       default='../data/nturgbd_raw_120/samples_with_mi
+                       default='../data/nturgbd_raw_120/samples_with_missing_skeletons.txt')
+    p
