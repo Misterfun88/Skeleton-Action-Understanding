@@ -188,4 +188,5 @@ if __name__ == '__main__':
     parser.add_argument('--data_path', default='../data/nturgbd_raw_120/nturgb+d_skeletons/')
     parser.add_argument('--ignored_sample_path',
                        default='../data/nturgbd_raw_120/samples_with_missing_skeletons.txt')
-    parser.add_argument('--out_folder', default='../data/NTU-RGB-D-120-AGCN
+    parser.add_argument('--out_folder', default='../data/NTU-RGB-D-120-AGCN/')
+    benchmark = ['xsub','xsetup
