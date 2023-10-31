@@ -192,4 +192,6 @@ if __name__ == '__main__':
     benchmark = ['xsub','xsetup', ]
 
     part = ['train', 'val']
-    arg = parser.
+    arg = parser.parse_args()
+
+    for b in
