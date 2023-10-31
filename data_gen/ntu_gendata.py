@@ -191,4 +191,5 @@ if __name__ == '__main__':
     parser.add_argument('--out_folder', default='../data/NTU-RGB-D-120-AGCN/')
     benchmark = ['xsub','xsetup', ]
 
-    part = ['trai
+    part = ['train', 'val']
+    arg = parser.
