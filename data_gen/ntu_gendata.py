@@ -202,4 +202,5 @@ if __name__ == '__main__':
             print(b, p)
             gendata(
                 arg.data_path,
-               
+                out_path,
+                arg.igno
