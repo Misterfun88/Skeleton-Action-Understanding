@@ -197,4 +197,5 @@ if __name__ == '__main__':
     for b in benchmark:
         for p in part:
             out_path = os.path.join(arg.out_folder, b)
-            if not os.path.exists(out_
+            if not os.path.exists(out_path):
+                os.makedi
