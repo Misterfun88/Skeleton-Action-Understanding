@@ -194,4 +194,5 @@ if __name__ == '__main__':
     part = ['train', 'val']
     arg = parser.parse_args()
 
-    for b in
+    for b in benchmark:
+        for p in part:
