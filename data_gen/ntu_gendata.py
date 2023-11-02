@@ -201,4 +201,5 @@ if __name__ == '__main__':
                 os.makedirs(out_path)
             print(b, p)
             gendata(
-           
+                arg.data_path,
+               
