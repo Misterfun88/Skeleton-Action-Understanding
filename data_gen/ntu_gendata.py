@@ -199,4 +199,6 @@ if __name__ == '__main__':
             out_path = os.path.join(arg.out_folder, b)
             if not os.path.exists(out_path):
                 os.makedirs(out_path)
-            print
+            print(b, p)
+            gendata(
+           
