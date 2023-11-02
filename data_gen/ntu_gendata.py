@@ -196,4 +196,5 @@ if __name__ == '__main__':
 
     for b in benchmark:
         for p in part:
-            out_path = os.path.joi
+            out_path = os.path.join(arg.out_folder, b)
+      
