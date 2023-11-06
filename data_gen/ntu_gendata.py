@@ -203,4 +203,5 @@ if __name__ == '__main__':
             gendata(
                 arg.data_path,
                 out_path,
-                arg.igno
+                arg.ignored_sample_path,
+             
