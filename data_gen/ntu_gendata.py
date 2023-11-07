@@ -204,4 +204,5 @@ if __name__ == '__main__':
                 arg.data_path,
                 out_path,
                 arg.ignored_sample_path,
-             
+                benchmark=b,
+               
