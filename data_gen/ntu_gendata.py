@@ -205,4 +205,4 @@ if __name__ == '__main__':
                 out_path,
                 arg.ignored_sample_path,
                 benchmark=b,
-               
+                part=p)
