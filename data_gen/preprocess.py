@@ -86,3 +86,4 @@ def pre_normalization(data, zaxis=[0, 1], xaxis=[8, 4]):
 if __name__ == '__main__':
     data = np.load('../data/ntu/xview/val_data.npy')
     pre_normalization(data)
+    np.save('../data/ntu/xview/data_val_pre.npy', data)
