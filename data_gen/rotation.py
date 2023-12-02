@@ -4,4 +4,4 @@ import math
 
 def rotation_matrix(axis, theta):
     """
-    Return the rotation
+    Return the rotation matrix associated with countercl
