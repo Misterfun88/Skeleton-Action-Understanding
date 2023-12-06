@@ -12,4 +12,5 @@ def rotation_matrix(axis, theta):
     axis = np.asarray(axis)
     axis = axis / math.sqrt(np.dot(axis, axis))
     a = math.cos(theta / 2.0)
-    b, c, d = -axis * math.sin(theta / 2.0
+    b, c, d = -axis * math.sin(theta / 2.0)
+    aa, bb, cc, dd = a 
