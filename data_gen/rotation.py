@@ -9,4 +9,5 @@ def rotation_matrix(axis, theta):
     """
     if np.abs(axis).sum() < 1e-6 or np.abs(theta) < 1e-6:
         return np.eye(3)
-    axis = np.asar
+    axis = np.asarray(axis)
+    axis = axis / mat
