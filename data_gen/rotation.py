@@ -15,4 +15,4 @@ def rotation_matrix(axis, theta):
     b, c, d = -axis * math.sin(theta / 2.0)
     aa, bb, cc, dd = a * a, b * b, c * c, d * d
     bc, ad, ac, ab, bd, cd = b * c, a * d, a * c, a * b, b * d, c * d
-    return np.array([[aa + b
+    return np.array([[aa + bb - cc - dd, 2 * (bc 
