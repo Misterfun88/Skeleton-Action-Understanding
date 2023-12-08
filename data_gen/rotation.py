@@ -14,4 +14,5 @@ def rotation_matrix(axis, theta):
     a = math.cos(theta / 2.0)
     b, c, d = -axis * math.sin(theta / 2.0)
     aa, bb, cc, dd = a * a, b * b, c * c, d * d
-    bc, ad, ac, ab, bd, cd = b 
+    bc, ad, ac, ab, bd, cd = b * c, a * d, a * c, a * b, b * d, c * d
+ 
