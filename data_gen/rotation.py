@@ -20,4 +20,5 @@ def rotation_matrix(axis, theta):
                      [2 * (bd + ac), 2 * (cd - ab), aa + dd - bb - cc]])
 
 
-def unit_vector(vect
+def unit_vector(vector):
+    """ Returns the unit ve
