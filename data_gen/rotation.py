@@ -21,4 +21,5 @@ def rotation_matrix(axis, theta):
 
 
 def unit_vector(vector):
-    """ Returns the unit ve
+    """ Returns the unit vector of the vector.  """
+    ret
