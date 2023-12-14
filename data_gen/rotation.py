@@ -22,4 +22,4 @@ def rotation_matrix(axis, theta):
 
 def unit_vector(vector):
     """ Returns the unit vector of the vector.  """
-    ret
+    return vector / np.linalg.norm(vector
