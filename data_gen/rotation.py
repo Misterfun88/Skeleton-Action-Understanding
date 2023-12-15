@@ -26,4 +26,5 @@ def unit_vector(vector):
 
 
 def angle_between(v1, v2):
-    """ Returns the angle in
+    """ Returns the angle in radians between vectors 'v1' and 'v2'::
+
