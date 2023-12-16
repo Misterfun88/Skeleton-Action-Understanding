@@ -30,4 +30,6 @@ def angle_between(v1, v2):
 
             >>> angle_between((1, 0, 0), (0, 1, 0))
             1.5707963267948966
-            >>> angle_between((1, 0, 0), (
+            >>> angle_between((1, 0, 0), (1, 0, 0))
+            0.0
+            >
