@@ -36,4 +36,5 @@ def angle_between(v1, v2):
             3.141592653589793
     """
     if np.abs(v1).sum() < 1e-6 or np.abs(v2).sum() < 1e-6:
-        re
+        return 0
+    v1_u = unit_v
