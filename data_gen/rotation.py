@@ -35,4 +35,5 @@ def angle_between(v1, v2):
             >>> angle_between((1, 0, 0), (-1, 0, 0))
             3.141592653589793
     """
-    if np.abs(v1).sum() < 1e-6 or np.abs(v2).su
+    if np.abs(v1).sum() < 1e-6 or np.abs(v2).sum() < 1e-6:
+        re
