@@ -38,4 +38,5 @@ def angle_between(v1, v2):
     if np.abs(v1).sum() < 1e-6 or np.abs(v2).sum() < 1e-6:
         return 0
     v1_u = unit_vector(v1)
-    v2_u = unit
+    v2_u = unit_vector(v2)
+    return np.arcco
