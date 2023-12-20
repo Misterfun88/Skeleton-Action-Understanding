@@ -44,3 +44,4 @@ def angle_between(v1, v2):
 
 def x_rotation(vector, theta):
     """Rotates 3-D vector around x-axis"""
+    R = np.array([[1, 0, 0]
