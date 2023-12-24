@@ -48,4 +48,5 @@ def x_rotation(vector, theta):
     return np.dot(R, vector)
 
 
-def y_rotation(vector, theta
+def y_rotation(vector, theta):
+    """Rotates 3-D vector around
