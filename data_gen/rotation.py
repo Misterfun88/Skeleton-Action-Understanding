@@ -47,3 +47,5 @@ def x_rotation(vector, theta):
     R = np.array([[1, 0, 0], [0, np.cos(theta), -np.sin(theta)], [0, np.sin(theta), np.cos(theta)]])
     return np.dot(R, vector)
 
+
+def y_rotation(vector, theta
