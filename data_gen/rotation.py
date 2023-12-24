@@ -50,4 +50,4 @@ def x_rotation(vector, theta):
 
 def y_rotation(vector, theta):
     """Rotates 3-D vector around y-axis"""
-    R = np.ar
+    R = np.array([[np.cos(theta), 0, np.sin
