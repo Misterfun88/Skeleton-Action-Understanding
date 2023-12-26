@@ -54,4 +54,5 @@ def y_rotation(vector, theta):
     return np.dot(R, vector)
 
 
-def z_rotati
+def z_rotation(vector, theta):
+    """Rotate
