@@ -55,4 +55,5 @@ def y_rotation(vector, theta):
 
 
 def z_rotation(vector, theta):
-    """Rotate
+    """Rotates 3-D vector around z-axis"""
+    R = np
