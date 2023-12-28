@@ -6,4 +6,6 @@ import torch
 from torch.autograd import Variable
 from torchvision import transforms
 import numpy as np
-n
+np.set_printoptions(threshold=np.inf)
+
+tr
