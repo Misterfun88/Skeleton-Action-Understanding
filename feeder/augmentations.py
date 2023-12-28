@@ -53,3 +53,43 @@ def temporal_cropresize(input_data,num_of_frames,l_ratio,output_size):
 
 
     C, T, V, M =input_data.shape
+
+    # Temporal crop
+    min_crop_length = 64
+
+    scale = np.random.rand(1)*(l_ratio[1]-l_ratio[0])+l_ratio[0]
+    temporal_crop_length = np.minimum(np.maximum(int(np.floor(num_of_frames*scale)),min_crop_length),num_of_frames)
+
+    start = np.random.randint(0,num_of_frames-temporal_crop_length+1)
+    temporal_context = input_data[:,start:start+temporal_crop_length, :, :]
+    
+    # interpolate
+    temporal_context = torch.tensor(temporal_context,dtype=torch.float)
+    temporal_context=temporal_context.permute(0, 2, 3, 1).contiguous().view(C * V * M,temporal_crop_length)
+    temporal_context=temporal_context[None, :, :, None]
+    temporal_context= F.interpolate(temporal_context, size=(output_size, 1), mode='bilinear',align_corners=False)
+    temporal_context = temporal_context.squeeze(dim=3).squeeze(dim=0) 
+    temporal_context=temporal_context.contiguous().view(C, V, M, output_size).permute(0, 3, 1, 2).contiguous().numpy()
+
+    
+    return temporal_context
+
+def crop_subsequence(input_data,num_of_frames,l_ratio,output_size):
+
+
+    C, T, V, M =input_data.shape
+
+    if l_ratio[0] == 0.5:
+    # if training , sample a random crop
+
+         min_crop_length = 64
+         scale = np.random.rand(1)*(l_ratio[1]-l_ratio[0])+l_ratio[0]
+         temporal_crop_length = np.minimum(np.maximum(int(np.floor(num_of_frames*scale)),min_crop_length),num_of_frames)
+
+         start = np.random.randint(0,num_of_frames-temporal_crop_length+1)
+         temporal_crop = input_data[:,start:start+temporal_crop_length, :, :]
+
+         temporal_crop= torch.tensor(temporal_crop,dtype=torch.float)
+         temporal_crop=temporal_crop.permute(0, 2, 3, 1).contiguous().view(C * V * M,temporal_crop_length)
+         temporal_crop=temporal_crop[None, :, :, None]
+         temporal_crop= F.interpolate(temporal_crop, size=(output_size, 1), mode='bilinear',align_corners=False)
