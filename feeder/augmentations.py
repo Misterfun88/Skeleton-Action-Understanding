@@ -93,3 +93,23 @@ def crop_subsequence(input_data,num_of_frames,l_ratio,output_size):
          temporal_crop=temporal_crop.permute(0, 2, 3, 1).contiguous().view(C * V * M,temporal_crop_length)
          temporal_crop=temporal_crop[None, :, :, None]
          temporal_crop= F.interpolate(temporal_crop, size=(output_size, 1), mode='bilinear',align_corners=False)
+         temporal_crop=temporal_crop.squeeze(dim=3).squeeze(dim=0) 
+         temporal_crop=temporal_crop.contiguous().view(C, V, M, output_size).permute(0, 3, 1, 2).contiguous().numpy()
+
+         return temporal_crop
+
+    else:
+    # if testing , sample a center crop
+
+        start = int((1-l_ratio[0]) * num_of_frames/2)
+        data =input_data[:,start:num_of_frames-start, :, :]
+        temporal_crop_length = data.shape[1]
+
+        temporal_crop= torch.tensor(data,dtype=torch.float)
+        temporal_crop=temporal_crop.permute(0, 2, 3, 1).contiguous().view(C * V * M,temporal_crop_length)
+        temporal_crop=temporal_crop[None, :, :, None]
+        temporal_crop= F.interpolate(temporal_crop, size=(output_size, 1), mode='bilinear',align_corners=False)
+        temporal_crop=temporal_crop.squeeze(dim=3).squeeze(dim=0) 
+        temporal_crop=temporal_crop.contiguous().view(C, V, M, output_size).permute(0, 3, 1, 2).contiguous().numpy()
+
+        return temporal_crop
