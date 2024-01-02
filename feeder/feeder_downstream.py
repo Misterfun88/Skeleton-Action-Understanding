@@ -8,4 +8,5 @@ from torchvision import transforms
 import numpy as np
 np.set_printoptions(threshold=np.inf)
 
-tr
+try:
+    from feeder import augmenta
