@@ -14,4 +14,6 @@ except:
     import augmentations
 
 
-class Feeder(torch.util
+class Feeder(torch.utils.data.Dataset):
+    """ 
+    Argum
