@@ -11,4 +11,7 @@ np.set_printoptions(threshold=np.inf)
 try:
     from feeder import augmentations
 except:
-    import augmentati
+    import augmentations
+
+
+class Feeder(torch.util
