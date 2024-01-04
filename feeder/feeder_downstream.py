@@ -9,4 +9,6 @@ import numpy as np
 np.set_printoptions(threshold=np.inf)
 
 try:
-    from feeder import augmenta
+    from feeder import augmentations
+except:
+    import augmentati
