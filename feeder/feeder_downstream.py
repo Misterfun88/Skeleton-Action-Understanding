@@ -26,4 +26,6 @@ class Feeder(torch.utils.data.Dataset):
                  num_frame_path,
                  l_ratio,
                  input_size,
-              
+                 mmap=True):
+
+        self.d
