@@ -28,4 +28,5 @@ class Feeder(torch.utils.data.Dataset):
                  input_size,
                  mmap=True):
 
-        self.d
+        self.data_path = data_path
+     
