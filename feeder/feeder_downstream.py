@@ -25,4 +25,5 @@ class Feeder(torch.utils.data.Dataset):
                  label_path,
                  num_frame_path,
                  l_ratio,
+                 input_size,
               
