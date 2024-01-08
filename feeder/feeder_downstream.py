@@ -29,4 +29,5 @@ class Feeder(torch.utils.data.Dataset):
                  mmap=True):
 
         self.data_path = data_path
-     
+        self.label_path = label_path
+      
