@@ -18,4 +18,6 @@ class Feeder(torch.utils.data.Dataset):
     """ 
     Arguments:
         data_path: the path to '.npy' data, the shape of data should be (N, C, T, V, M)
-   
+    """
+
+    def __init__(s
