@@ -22,4 +22,5 @@ class Feeder(torch.utils.data.Dataset):
 
     def __init__(self,
                  data_path,
-      
+                 label_path,
+    
