@@ -30,4 +30,4 @@ class Feeder(torch.utils.data.Dataset):
 
         self.data_path = data_path
         self.label_path = label_path
-      
+        self.num_frame_path= num_fra
