@@ -36,4 +36,5 @@ class Feeder(torch.utils.data.Dataset):
         self.l_ratio = l_ratio
 
 
-        self.load
+        self.load_data(mmap)
+        self.N, self.C, s
