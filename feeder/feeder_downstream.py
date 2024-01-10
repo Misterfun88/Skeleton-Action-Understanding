@@ -31,4 +31,6 @@ class Feeder(torch.utils.data.Dataset):
         self.data_path = data_path
         self.label_path = label_path
         self.num_frame_path= num_frame_path
-        self.input_size=input_si
+        self.input_size=input_size
+     
+        self.l_rat
