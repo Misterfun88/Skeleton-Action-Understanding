@@ -37,4 +37,4 @@ class Feeder(torch.utils.data.Dataset):
 
 
         self.load_data(mmap)
-        self.N, self.C, s
+        self.N, self.C, self.T, self.V, self.M = self
