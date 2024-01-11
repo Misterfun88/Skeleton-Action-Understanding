@@ -40,4 +40,4 @@ class Feeder(torch.utils.data.Dataset):
         self.N, self.C, self.T, self.V, self.M = self.data.shape
         self.S = self.V
         self.B = self.V
-        self.Bone = [(1, 2), (2, 21), (3, 21), (4, 3), (5, 21), (6, 
+        self.Bone = [(1, 2), (2, 21), (3, 21), (4, 3), (5, 21), (6, 5), (7, 6), (8, 7), (
