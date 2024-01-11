@@ -39,4 +39,5 @@ class Feeder(torch.utils.data.Dataset):
         self.load_data(mmap)
         self.N, self.C, self.T, self.V, self.M = self.data.shape
         self.S = self.V
-        self.
+        self.B = self.V
+        self.Bone = [(1, 2), 
