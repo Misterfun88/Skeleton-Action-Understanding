@@ -48,4 +48,6 @@ class Feeder(torch.utils.data.Dataset):
         print(self.data.shape,len(self.number_of_frames),len(self.label))
         print("l_ratio",self.l_ratio)
 
-    def load_data(self, 
+    def load_data(self, mmap):
+        # data: N C V T M
+
