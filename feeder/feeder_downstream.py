@@ -45,4 +45,5 @@ class Feeder(torch.utils.data.Dataset):
                      (18, 17), (19, 18), (20, 19), (21, 21), (22, 23), (23, 8), (24, 25), (25, 12)]
         
         
-        print(self.data.shape,len(sel
+        print(self.data.shape,len(self.number_of_frames),len(self.label))
+    
