@@ -46,4 +46,4 @@ class Feeder(torch.utils.data.Dataset):
         
         
         print(self.data.shape,len(self.number_of_frames),len(self.label))
-    
+        print("l_ratio",self.
