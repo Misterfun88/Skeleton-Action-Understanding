@@ -60,4 +60,5 @@ class Feeder(torch.utils.data.Dataset):
         # load num of valid frame length
         self.number_of_frames= np.load(self.num_frame_path)
 
-  
+        # load label
+        if
