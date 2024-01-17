@@ -51,3 +51,5 @@ class Feeder(torch.utils.data.Dataset):
     def load_data(self, mmap):
         # data: N C V T M
 
+        # load data
+        if mma
