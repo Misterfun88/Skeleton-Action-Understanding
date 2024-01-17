@@ -52,4 +52,5 @@ class Feeder(torch.utils.data.Dataset):
         # data: N C V T M
 
         # load data
-        if mma
+        if mmap:
+            s
