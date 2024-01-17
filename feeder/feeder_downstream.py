@@ -53,4 +53,4 @@ class Feeder(torch.utils.data.Dataset):
 
         # load data
         if mmap:
-            s
+            self.data = np.load(self.data_path,
