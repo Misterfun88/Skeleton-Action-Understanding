@@ -61,4 +61,4 @@ class Feeder(torch.utils.data.Dataset):
         self.number_of_frames= np.load(self.num_frame_path)
 
         # load label
-        if
+        if '.pkl' in self.label_path:
