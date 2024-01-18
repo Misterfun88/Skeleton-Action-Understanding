@@ -62,4 +62,5 @@ class Feeder(torch.utils.data.Dataset):
 
         # load label
         if '.pkl' in self.label_path:
-            with open(self.
+            with open(self.label_path, 'rb') as f:
+            
