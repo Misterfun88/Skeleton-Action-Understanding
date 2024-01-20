@@ -65,4 +65,4 @@ class Feeder(torch.utils.data.Dataset):
             with open(self.label_path, 'rb') as f:
                 self.sample_name, self.label = pickle.load(f)
         elif '.npy' in self.label_path:
-              
+                self.label = np.load(self.label_p
