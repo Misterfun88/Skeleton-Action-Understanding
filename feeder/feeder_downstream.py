@@ -74,3 +74,7 @@ class Feeder(torch.utils.data.Dataset):
         return self
 
     def __getitem__(self, index):
+
+        # get raw input
+
+        # inp
