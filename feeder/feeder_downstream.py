@@ -70,4 +70,6 @@ class Feeder(torch.utils.data.Dataset):
     def __len__(self):
         return self.N
 
-    def __iter_
+    def __iter__(self):
+        return self
+
