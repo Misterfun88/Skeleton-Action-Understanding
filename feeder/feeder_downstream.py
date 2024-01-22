@@ -67,4 +67,7 @@ class Feeder(torch.utils.data.Dataset):
         elif '.npy' in self.label_path:
                 self.label = np.load(self.label_path).tolist()
 
-    def __len__(self)
+    def __len__(self):
+        return self.N
+
+    def __iter_
