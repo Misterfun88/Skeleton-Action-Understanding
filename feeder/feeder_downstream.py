@@ -73,3 +73,4 @@ class Feeder(torch.utils.data.Dataset):
     def __iter__(self):
         return self
 
+    def __getitem__(self, index):
