@@ -77,4 +77,5 @@ class Feeder(torch.utils.data.Dataset):
 
         # get raw input
 
-        # inp
+        # input: C, T, V, M
+        
