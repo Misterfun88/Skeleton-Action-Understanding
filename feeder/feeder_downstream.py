@@ -82,4 +82,5 @@ class Feeder(torch.utils.data.Dataset):
         number_of_frames = self.number_of_frames[index]
         label = self.label[index]
 
-      
+        # crop a sub-sequnce 
+        
