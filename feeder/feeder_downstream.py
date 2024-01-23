@@ -83,4 +83,4 @@ class Feeder(torch.utils.data.Dataset):
         label = self.label[index]
 
         # crop a sub-sequnce 
-        data_numpy = augmentations.crop_su
+        data_numpy = augmentations.crop_subsequence(data_numpy, number
