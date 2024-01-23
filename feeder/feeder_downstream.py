@@ -78,4 +78,5 @@ class Feeder(torch.utils.data.Dataset):
         # get raw input
 
         # input: C, T, V, M
-        data_numpy = np.array(self.data[
+        data_numpy = np.array(self.data[index])
+        number_of_fra
