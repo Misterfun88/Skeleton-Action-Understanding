@@ -80,4 +80,6 @@ class Feeder(torch.utils.data.Dataset):
         # input: C, T, V, M
         data_numpy = np.array(self.data[index])
         number_of_frames = self.number_of_frames[index]
-   
+        label = self.label[index]
+
+      
