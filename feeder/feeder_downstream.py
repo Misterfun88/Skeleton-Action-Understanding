@@ -85,4 +85,6 @@ class Feeder(torch.utils.data.Dataset):
         # crop a sub-sequnce 
         data_numpy = augmentations.crop_subsequence(data_numpy, number_of_frames, self.l_ratio, self.input_size)
 
-        # return dat
+        # return data_numpy, label
+          
+  
