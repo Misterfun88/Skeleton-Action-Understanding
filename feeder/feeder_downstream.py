@@ -89,4 +89,4 @@ class Feeder(torch.utils.data.Dataset):
           
         # joint representation
         jt = data_numpy.transpose(1,3,2,0)
-        jt =
+        jt = jt.reshape(self.input_size,self.M*se
