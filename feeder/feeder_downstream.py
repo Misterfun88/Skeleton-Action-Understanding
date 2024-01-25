@@ -88,4 +88,4 @@ class Feeder(torch.utils.data.Dataset):
         # return data_numpy, label
           
         # joint representation
-       
+        jt = data_numpy.transpose
