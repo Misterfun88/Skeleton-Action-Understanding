@@ -93,4 +93,5 @@ class Feeder(torch.utils.data.Dataset):
         js = data_numpy.transpose(3,2,1,0)
         js = js.reshape(self.M*self.V, self.input_size*self.C).astype('float32')
 
-     
+        # bone representation
+        b
