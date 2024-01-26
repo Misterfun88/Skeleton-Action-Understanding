@@ -94,4 +94,4 @@ class Feeder(torch.utils.data.Dataset):
         js = js.reshape(self.M*self.V, self.input_size*self.C).astype('float32')
 
         # bone representation
-        b
+        bone = np.zeros_like(data_nu
