@@ -95,4 +95,5 @@ class Feeder(torch.utils.data.Dataset):
 
         # bone representation
         bone = np.zeros_like(data_numpy)
-        for v1,v2 in
+        for v1,v2 in self.Bone:
+            bo
