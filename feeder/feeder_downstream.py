@@ -100,4 +100,6 @@ class Feeder(torch.utils.data.Dataset):
         bt = bone.transpose(1,3,2,0)
         bt = bt.reshape(self.input_size,self.M*self.V*self.C).astype('float32')
         bs = bone.transpose(3,2,1,0)
-        bs = bs.reshape(self.M*self.V, self.input_size*self.C).astype('fl
+        bs = bs.reshape(self.M*self.V, self.input_size*self.C).astype('float32')
+
+        # motion re
