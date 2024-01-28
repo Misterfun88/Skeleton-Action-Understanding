@@ -103,4 +103,5 @@ class Feeder(torch.utils.data.Dataset):
         bs = bs.reshape(self.M*self.V, self.input_size*self.C).astype('float32')
 
         # motion representation
-        motion = np.zero
+        motion = np.zeros_like(data_numpy) 
+      
