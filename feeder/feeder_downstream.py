@@ -104,4 +104,4 @@ class Feeder(torch.utils.data.Dataset):
 
         # motion representation
         motion = np.zeros_like(data_numpy) 
-        motion[:,:-1,:,:] = data_numpy[
+        motion[:,:-1,:,:] = data_numpy[:,1:,:,:] - data_numpy[
