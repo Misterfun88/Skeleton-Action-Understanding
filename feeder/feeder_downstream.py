@@ -110,4 +110,6 @@ class Feeder(torch.utils.data.Dataset):
         ms = motion.transpose(3,2,1,0)
         ms = ms.reshape(self.M*self.V, self.input_size*self.C).astype('float32')
 
-        return jt, js, bt, bs, 
+        return jt, js, bt, bs, mt, ms, label
+        
+      
