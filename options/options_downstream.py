@@ -120,3 +120,10 @@ class  opts_ntu_120_cross_setup():
     }
    
     self.test_feeder_args = {
+
+      'data_path': root_path + "/NTU-RGB-D-120-AGCN/xsetup/val_data_joint.npy",
+      'label_path': root_path + "/NTU-RGB-D-120-AGCN/xsetup/val_label.pkl",
+      'num_frame_path': root_path + "/NTU-RGB-D-120-AGCN/xsetup/val_num_frame.npy",
+      'l_ratio': [1.0],
+      'input_size': 64
+    }
