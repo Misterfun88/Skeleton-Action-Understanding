@@ -79,3 +79,42 @@ class Feeder(torch.utils.data.Dataset):
         flip_prob  = random.random()
         if flip_prob < 0.5:
                  data_numpy_v1 = augmentations.joint_courruption(data_numpy_v1_crop)
+        else:
+                 data_numpy_v1 = augmentations.pose_augmentation(data_numpy_v1_crop)
+
+
+        # apply spatio-temporal augmentations to generate  view 2
+        # temporal crop-resize
+        data_numpy_v2_crop = augmentations.temporal_cropresize(data_numpy,number_of_frames, self.l_ratio, self.input_size)
+        # randomly select  one of the spatial augmentations 
+        flip_prob  = random.random()
+        if flip_prob < 0.5:
+                 data_numpy_v2 = augmentations.joint_courruption(data_numpy_v2_crop)
+        else:
+                 data_numpy_v2 = augmentations.pose_augmentation(data_numpy_v2_crop)
+                 
+                 
+        # apply spatio-temporal augmentations to generate  view 3
+        # temporal crop-resize
+        data_numpy_v3_crop = augmentations.temporal_cropresize(data_numpy,number_of_frames, self.l_ratio, self.input_size)
+        # randomly select  one of the spatial augmentations 
+        flip_prob  = random.random()
+        if flip_prob < 0.5:
+                 data_numpy_v3 = augmentations.joint_courruption(data_numpy_v3_crop)
+        else:
+                 data_numpy_v3 = augmentations.pose_augmentation(data_numpy_v3_crop)
+                 
+                 
+        # apply spatio-temporal augmentations to generate  view 4
+        # temporal crop-resize
+        data_numpy_v4_crop = augmentations.temporal_cropresize(data_numpy,number_of_frames, self.l_ratio, self.input_size)
+        # randomly select  one of the spatial augmentations 
+        flip_prob  = random.random()
+        if flip_prob < 0.5:
+                 data_numpy_v4 = augmentations.joint_courruption(data_numpy_v4_crop)
+        else:
+                 data_numpy_v4 = augmentations.pose_augmentation(data_numpy_v4_crop)
+
+        
+
+        return data_numpy_v1, data_numpy_v2, data_numpy_v3, data_numpy_v4
