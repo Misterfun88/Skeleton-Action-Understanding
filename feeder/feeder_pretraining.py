@@ -41,3 +41,41 @@ class Feeder(torch.utils.data.Dataset):
                      (10, 9), (11, 10), (12, 11), (13, 1), (14, 13), (15, 14), (16, 15), (17, 1),
                      (18, 17), (19, 18), (20, 19), (21, 21), (22, 23), (23, 8), (24, 25), (25, 12)]
         
+
+        print(self.data.shape,len(self.number_of_frames))
+        print("l_ratio",self.l_ratio)
+
+    def load_data(self, mmap):
+        # data: N C T V M
+
+        # load data
+        if mmap:
+            self.data = np.load(self.data_path, mmap_mode='r')
+        else:
+            self.data = np.load(self.data_path)
+
+        # load num of valid frame length
+        self.number_of_frames= np.load(self.num_frame_path)
+
+    def __len__(self):
+        return self.N
+
+    def __iter__(self):
+        return self
+
+    def __getitem__(self, index):
+  
+        # get raw input
+
+        # input: C, T, V, M
+        data_numpy = np.array(self.data[index])
+        
+        number_of_frames = self.number_of_frames[index]
+     
+        # apply spatio-temporal augmentations to generate  view 1 
+        # temporal crop-resize
+        data_numpy_v1_crop = augmentations.temporal_cropresize(data_numpy, number_of_frames, self.l_ratio, self.input_size)
+        # randomly select  one of the spatial augmentations 
+        flip_prob  = random.random()
+        if flip_prob < 0.5:
+                 data_numpy_v1 = augmentations.joint_courruption(data_numpy_v1_crop)
