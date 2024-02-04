@@ -33,3 +33,36 @@ class  opts_ntu_60_cross_subject():
    
    # feeder
    self.train_feeder_args = {
+     "data_path": root_path + "/NTU-RGB-D-60-AGCN/xsub/train_data_joint.npy",
+     "num_frame_path": root_path + "/NTU-RGB-D-60-AGCN/xsub/train_num_frame.npy",
+     "l_ratio": [0.1,1],
+     "input_size": 64
+   }
+
+class  opts_ntu_120_cross_subject():
+
+  def __init__(self):
+
+   self.encoder_args = encoder_arguments
+   
+   # feeder
+   self.train_feeder_args = {
+     "data_path": root_path + "/NTU-RGB-D-120-AGCN/xsub/train_data_joint.npy",
+     "num_frame_path": root_path + "/NTU-RGB-D-120-AGCN/xsub/train_num_frame.npy",
+     "l_ratio": [0.1,1],
+     "input_size": 64
+   }
+
+class  opts_ntu_120_cross_setup():
+
+  def __init__(self):
+
+   self.encoder_args = encoder_arguments
+   
+   # feeder
+   self.train_feeder_args = {
+     "data_path": root_path + "/NTU-RGB-D-120-AGCN/xsetup/train_data_joint.npy",
+     "num_frame_path": root_path + "/NTU-RGB-D-120-AGCN/xsetup/train_num_frame.npy",
+     "l_ratio": [0.1,1],
+     "input_size": 64
+   }
