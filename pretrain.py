@@ -93,3 +93,37 @@ class FullGatherLayer(torch.autograd.Function):
         all_gradients = torch.stack(grads)
         dist.all_reduce(all_gradients)
         return all_gradients[dist.get_rank()]
+
+
+def main():
+    args = parser.parse_args()
+    init_distributed_mode(args)
+    gpu = torch.device(args.device)
+    torch.cuda.set_device(args.local_rank)
+
+    if args.seed is not None:
+        random.seed(args.seed)
+        torch.manual_seed(args.seed)
+        cudnn.deterministic = True
+        warnings.warn('You have chosen to seed training. '
+                      'This will turn on the CUDNN deterministic setting, '
+                      'which can slow down your training considerably! '
+                      'You may see unexpected behavior when restarting '
+                      'from checkpoints.')
+
+    ngpus_per_node = torch.cuda.device_count()
+    
+
+    # pretraining dataset and protocol
+    from options import options_pretraining as options 
+    if args.pre_dataset == 'ntu60' and args.protocol == 'cross_view':
+        opts = options.opts_ntu_60_cross_view()
+    elif args.pre_dataset == 'ntu60' and args.protocol == 'cross_subject':
+        opts = options.opts_ntu_60_cross_subject()
+    elif args.pre_dataset == 'ntu120' and args.protocol == 'cross_setup':
+        opts = options.opts_ntu_120_cross_setup()
+    elif args.pre_dataset == 'ntu120' and args.protocol == 'cross_subject':
+        opts = options.opts_ntu_120_cross_subject()
+
+    # create model
+    print("=> creating model")
