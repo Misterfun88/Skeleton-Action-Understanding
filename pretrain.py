@@ -162,3 +162,27 @@ def main():
             print("=> loaded checkpoint '{}' (epoch {})"
                   .format(args.resume, checkpoint['epoch']))
             del checkpoint
+            torch.cuda.empty_cache()
+        else:
+            print("=> no checkpoint found at '{}'".format(args.resume))
+
+    # cudnn.benchmark = True
+
+    ## Data loading code
+    train_dataset = get_pretraining_set(opts)
+
+    train_sampler = torch.utils.data.distributed.DistributedSampler(train_dataset, shuffle=True)
+    assert args.batch_size % args.world_size == 0
+    per_device_batch_size = args.batch_size // args.world_size
+    
+    train_loader = torch.utils.data.DataLoader(
+        train_dataset, batch_size=per_device_batch_size,
+        num_workers=args.workers, pin_memory=True, sampler=train_sampler)
+    
+    if args.rank==0:
+        writer = SummaryWriter(args.checkpoint_path)
+
+    scaler = torch.cuda.amp.GradScaler()
+
+    for epoch in range(args.start_epoch, args.epochs):
+        train_sampler.set_epoch(epoch)
