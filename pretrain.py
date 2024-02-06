@@ -186,3 +186,33 @@ def main():
 
     for epoch in range(args.start_epoch, args.epochs):
         train_sampler.set_epoch(epoch)
+        adjust_learning_rate(optimizer, epoch, args)
+        # train for one epoch
+        loss = train(gpu, scaler, train_loader, model, criterion, optimizer, epoch, args)
+        if args.rank==0:
+            writer.add_scalar('train_loss', loss.avg, global_step=epoch)
+
+        if epoch % 50 == 0 and args.rank==0:
+                  save_checkpoint({
+                      'epoch': epoch + 1,
+                      'state_dict': model.state_dict(),
+                      'optimizer' : optimizer.state_dict(),
+                  }, is_best=False, filename=args.checkpoint_path+'/checkpoint_{:04d}.pth.tar'.format(epoch,loss.avg))
+
+def off_diagonal(x):
+    n, m = x.shape
+    assert n == m
+    return x.flatten()[:-1].view(n - 1, n + 1)[:, 1:].flatten()
+
+def vc_reg(x):
+    B, D = x.shape
+
+    std_x = torch.sqrt(x.var(dim=0) + 1e-04)
+    std_loss = torch.mean(torch.relu(1 - std_x))
+
+    z = x - x.mean(dim=0)
+    cov_z = (z.T @ z) / (B - 1) 
+    cov_loss = off_diagonal(cov_z).pow(2).sum() / D
+
+    return 5 * std_loss + cov_loss
+
