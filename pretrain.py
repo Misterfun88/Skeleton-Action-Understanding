@@ -55,3 +55,41 @@ parser.add_argument('--seed', default=None, type=int,
 parser.add_argument('--gpu', default=None, type=int,
                     help='GPU id to use.')
 parser.add_argument('--checkpoint-path', default='./checkpoints', type=str)
+
+
+parser.add_argument('--pre-dataset', default='ntu60', type=str,
+                    help='which dataset to use for self supervised training (ntu60 or ntu120)')
+parser.add_argument('--protocol', default='cross_subject', type=str,
+                    help='traiining protocol cross_view/cross_subject/cross_setup')
+
+
+parser.add_argument('--cos', action='store_true',
+                    help='use cosine lr schedule')
+
+
+parser.add_argument('--device', default='cuda',
+                        help='device to use for training / testing')
+parser.add_argument('--world-size', default=4, type=int,
+                        help='number of distributed processes')
+parser.add_argument('--local_rank', default=-1, type=int)
+parser.add_argument('--dist-url', default='env://',
+                        help='url used to set up distributed training')
+
+
+class FullGatherLayer(torch.autograd.Function):
+    """
+    Gather tensors from all process and support backward propagation
+    for the gradients across processes.
+    """
+
+    @staticmethod
+    def forward(ctx, x):
+        output = [torch.zeros_like(x) for _ in range(dist.get_world_size())]
+        dist.all_gather(output, x)
+        return tuple(output)
+
+    @staticmethod
+    def backward(ctx, *grads):
+        all_gradients = torch.stack(grads)
+        dist.all_reduce(all_gradients)
+        return all_gradients[dist.get_rank()]
