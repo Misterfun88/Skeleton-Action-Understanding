@@ -274,3 +274,35 @@ def train(gpu, scaler, train_loader, model, criterion, optimizer, epoch, args):
         losses.update(loss.item(), B)
 
         # compute gradient and do SGD step
+        scaler.scale(loss).backward()
+        scaler.step(optimizer)
+        scaler.update()
+        
+
+        # measure elapsed time
+        batch_time.update(time.time() - end)
+        end = time.time()
+
+        if i % args.print_freq == 0:
+            progress.display(i)
+       
+    return losses
+
+def save_checkpoint(state, is_best, filename='checkpoint.pth.tar'):
+    torch.save(state, filename)
+    if is_best:
+        shutil.copyfile(filename, 'model_best.pth.tar')
+
+
+class AverageMeter(object):
+    """Computes and stores the average and current value"""
+    def __init__(self, name, fmt=':f'):
+        self.name = name
+        self.fmt = fmt
+        self.reset()
+
+    def reset(self):
+        self.val = 0
+        self.avg = 0
+        self.sum = 0
+        self.count = 0
