@@ -246,3 +246,31 @@ def train(gpu, scaler, train_loader, model, criterion, optimizer, epoch, args):
         with torch.cuda.amp.autocast():
             # compute output
             z_j, z_b, z_m, z_uj, z_ub, z_um = model(data_v1, data_v2, data_v3, data_v4)
+
+            z_j = torch.cat(FullGatherLayer.apply(z_j), dim=0)
+            z_b = torch.cat(FullGatherLayer.apply(z_b), dim=0)
+            z_m = torch.cat(FullGatherLayer.apply(z_m), dim=0)
+
+            z_uj = torch.cat(FullGatherLayer.apply(z_uj), dim=0)
+            z_ub = torch.cat(FullGatherLayer.apply(z_ub), dim=0)
+            z_um = torch.cat(FullGatherLayer.apply(z_um), dim=0)
+
+
+            B, D = z_j.shape
+            
+            # intra-modal consistency
+            intra = criterion(z_j, z_uj) + criterion(z_b, z_ub) + criterion(z_m, z_um)
+
+            # inter-modal consistency  
+            center = (z_j + z_b + z_m) / 3   
+            inter = criterion(z_j, center) + criterion(z_b, center) + criterion(z_m, center) 
+
+            # vc regularization
+            reg = vc_reg(z_j) + vc_reg(z_b) + vc_reg(z_m) \
+                + vc_reg(z_uj) + vc_reg(z_ub) + vc_reg(z_um)   
+            
+            loss = 5 * ( intra + inter) + reg
+
+        losses.update(loss.item(), B)
+
+        # compute gradient and do SGD step
