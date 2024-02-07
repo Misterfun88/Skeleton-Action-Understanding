@@ -216,3 +216,33 @@ def vc_reg(x):
 
     return 5 * std_loss + cov_loss
 
+
+def train(gpu, scaler, train_loader, model, criterion, optimizer, epoch, args):
+    batch_time = AverageMeter('Time', ':6.3f')
+    data_time = AverageMeter('Data', ':6.3f')
+    losses = AverageMeter('Loss', ':.4e')
+
+    progress = ProgressMeter(
+        len(train_loader),
+        [batch_time, losses,],
+        prefix="Epoch: [{}] Lr_rate [{}]".format(epoch,optimizer.param_groups[0]['lr']))
+
+    # switch to train mode
+    model.train()
+
+
+    end = time.time()
+    for i, (data_v1, data_v2, data_v3, data_v4) in enumerate(train_loader):
+        # measure data loading time
+        data_time.update(time.time() - end)
+
+        if args.gpu is not None:
+            data_v1 = data_v1.float().cuda(gpu, non_blocking=True)
+            data_v2 = data_v2.float().cuda(gpu, non_blocking=True)
+            data_v3 = data_v3.float().cuda(gpu, non_blocking=True)
+            data_v4 = data_v4.float().cuda(gpu, non_blocking=True)
+        
+        optimizer.zero_grad()
+        with torch.cuda.amp.autocast():
+            # compute output
+            z_j, z_b, z_m, z_uj, z_ub, z_um = model(data_v1, data_v2, data_v3, data_v4)
