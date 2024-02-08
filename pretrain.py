@@ -340,3 +340,29 @@ def linear_warmup(optimizer, step, args):
 
     for param_group in optimizer.param_groups:
         param_group['lr'] = learning_rate
+
+def adjust_learning_rate(optimizer, epoch, args):
+    """Decay the learning rate based on schedule"""
+    lr = args.lr
+    if args.cos:  # cosine lr schedule
+        lr *= 0.5 * (1. + math.cos(math.pi * epoch / (args.epochs - args.warmup_epochs)))
+    else:  # stepwise lr schedule
+        for milestone in args.schedule:
+            lr *= 0.1 if epoch >= milestone else 1.
+    for param_group in optimizer.param_groups:
+        param_group['lr'] = lr
+
+
+def accuracy(output, target, topk=(1,)):
+    """Computes the accuracy over the k top predictions for the specified values of k"""
+    with torch.no_grad():
+        maxk = max(topk)
+        batch_size = target.size(0)
+
+        _, pred = output.topk(maxk, 1, True, True)
+        pred = pred.t()
+        correct = pred.eq(target.reshape(1, -1).expand_as(pred))
+        res = []
+        for k in topk:
+            correct_k = correct[:k].reshape(-1).float().sum(0, keepdim=True)
+            res.append(correct_k.mul_(100.0 / batch_size))
