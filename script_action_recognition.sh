@@ -1,3 +1,6 @@
 dir=$1
 dataset=$2
-prot
+protocol=$3
+
+
+CUDA_VISIBLE_DEVICE
