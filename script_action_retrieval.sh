@@ -3,4 +3,6 @@ dataset=$2
 protocol=$3
 
 
-CUDA_VISIBLE_DEVICES=0 python action_retrieva
+CUDA_VISIBLE_DEVICES=0 python action_retrieval.py \
+  --lr 0.03 \
+  --batch-size 512
