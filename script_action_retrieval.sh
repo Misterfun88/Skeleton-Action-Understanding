@@ -7,4 +7,4 @@ CUDA_VISIBLE_DEVICES=0 python action_retrieval.py \
   --lr 0.03 \
   --batch-size 512 \
   --knn-neighbours 1 \
-  --pretrained  ./checkpoints/${
+  --pretrained  ./checkpoints/${dir}/checkpoint_0450.pth.t
