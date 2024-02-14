@@ -8,4 +8,4 @@ CUDA_VISIBLE_DEVICES=0 python action_retrieval.py \
   --batch-size 512 \
   --knn-neighbours 1 \
   --pretrained  ./checkpoints/${dir}/checkpoint_0450.pth.tar \
-  --finetune-dataset ${data
+  --finetune-dataset ${dataset} --protocol ${protocol}
