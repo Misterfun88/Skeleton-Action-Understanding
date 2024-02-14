@@ -1,1 +1,1 @@
-m
+mkdir -p ./checkpoints/ntu60_xsub
