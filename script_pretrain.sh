@@ -3,4 +3,4 @@ mkdir -p ./checkpoints/ntu60_xsub
 # mkdir -p ./checkpoints/ntu120_xsub
 # mkdir -p ./checkpoints/ntu120_xset
 
-C
+CUDA_VISIBLE_DEVICES=0,1
