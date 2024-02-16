@@ -5,4 +5,5 @@ mkdir -p ./checkpoints/ntu60_xsub
 
 CUDA_VISIBLE_DEVICES=0,1,2,3 torchrun  --nproc_per_node=4 pretrain.py   \
   --lr 0.0005   --batch-size 512  \
-  --checkpoint-path ./checkpoints/ntu6
+  --checkpoint-path ./checkpoints/ntu60_xsub \
+  --schedule 351  -
