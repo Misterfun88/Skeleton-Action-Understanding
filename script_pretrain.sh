@@ -9,4 +9,5 @@ CUDA_VISIBLE_DEVICES=0,1,2,3 torchrun  --nproc_per_node=4 pretrain.py   \
   --schedule 351  --epochs 451  \
   --pre-dataset ntu60  --protocol cross_subject | tee -a ./checkpoints/ntu60_xsub/train.log
 
-# CUDA_VISIBLE_DEVICES=0,1,2,3 torchrun  --nproc_per_node=4 p
+# CUDA_VISIBLE_DEVICES=0,1,2,3 torchrun  --nproc_per_node=4 pretrain.py   \
+#   --lr 0.0005   --ba
