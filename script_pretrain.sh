@@ -16,4 +16,5 @@ CUDA_VISIBLE_DEVICES=0,1,2,3 torchrun  --nproc_per_node=4 pretrain.py   \
 #   --pre-dataset ntu60  --protocol cross_view | tee -a ./checkpoints/ntu60_xview/train.log
 
 # CUDA_VISIBLE_DEVICES=0,1,2,3 torchrun  --nproc_per_node=4 pretrain.py   \
-#   --lr 
+#   --lr 0.0005   --batch-size 1024  \
+#   --check
