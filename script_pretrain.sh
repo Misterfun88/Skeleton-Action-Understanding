@@ -21,4 +21,4 @@ CUDA_VISIBLE_DEVICES=0,1,2,3 torchrun  --nproc_per_node=4 pretrain.py   \
 #   --schedule 351  --epochs 451  \
 #   --pre-dataset ntu120  --protocol cross_subject | tee -a ./checkpoints/ntu120_xsub/train.log 
 
-# CUDA_VISIBLE_DEVICE
+# CUDA_VISIBLE_DEVICES=0,1,2,3 torchrun  --nproc_per_node=
