@@ -23,4 +23,6 @@ CUDA_VISIBLE_DEVICES=0,1,2,3 torchrun  --nproc_per_node=4 pretrain.py   \
 
 # CUDA_VISIBLE_DEVICES=0,1,2,3 torchrun  --nproc_per_node=4 pretrain.py   \
 #   --lr 0.0005   --batch-size 1024  \
-#   --checkpoint-path ./checkpoints/ntu120_
+#   --checkpoint-path ./checkpoints/ntu120_xset \
+#   --schedule 351  --epochs 451  \
+#   -
