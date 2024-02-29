@@ -10,4 +10,4 @@ fi
   --lr 0.0005   --batch-size 1024  \
   --checkpoint-path ./checkpoints/${test_name}_xsub \
   --schedule 351  --epochs 451  \
-  --pre-dataset ntu120  --proto
+  --pre-dataset ntu120  --protocol cross_subject | tee -a ./checkpoi
