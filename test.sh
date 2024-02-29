@@ -7,4 +7,5 @@ if [ ! -d ./checkpoints/${test_name} ];then
 
 fi
  CUDA_VISIBLE_DEVICES=1,2 torchrun  --nproc_per_node=2 pretrain.py   \
-  --lr 0.0005   --batc
+  --lr 0.0005   --batch-size 1024  \
+  --checkpoin
