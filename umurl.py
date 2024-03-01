@@ -38,3 +38,33 @@ class MS_Emb(nn.Module,):
                             nn.Linear(hidden_size, hidden_size),
         ) 
 
+
+        self.s_embedding = nn.Sequential(
+                            nn.Linear(s_input_size, hidden_size),
+                            nn.LayerNorm(hidden_size),
+                            nn.ReLU(True),
+                            nn.Linear(hidden_size, hidden_size),
+        )
+
+    def forward(self, t_src, s_src):
+        t_src = self.t_embedding(t_src)
+        s_src = self.s_embedding(s_src)
+
+        return t_src, s_src
+    
+# fusion module for diffierent modalities
+class Emb_Fusion(nn.Module):
+    def __init__(self, t_input_size, s_input_size, hidden_size) -> None:
+        super().__init__()
+
+        self.t_fusion = nn.Sequential(
+                            nn.Linear(t_input_size, hidden_size, bias=False),
+        ) 
+
+
+        self.s_fusion = nn.Sequential(
+                            nn.Linear(s_input_size, hidden_size, bias=False),
+        )
+
+
+    def forward(self, t_src, s_src):
