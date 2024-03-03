@@ -68,3 +68,32 @@ class Emb_Fusion(nn.Module):
 
 
     def forward(self, t_src, s_src):
+        t_src = self.t_fusion(t_src)
+        s_src = self.s_fusion(s_src)
+
+        return t_src, s_src
+
+# spatio-temporal transformer encoder
+class ST_TR(nn.Module):
+    def __init__(self, hidden_size, num_head, num_layer) -> None:
+        super().__init__()
+        self.d_model  = hidden_size 
+
+        self.pe = PositionalEncoding(hidden_size)
+        t_layer = TransformerEncoderLayer(self.d_model , num_head, self.d_model , batch_first = True, dropout=0.) 
+        self.t_tr = TransformerEncoder(t_layer, num_layer)
+
+        s_layer = TransformerEncoderLayer(self.d_model , num_head, self.d_model , batch_first = True, dropout=0.)
+        self.s_tr = TransformerEncoder(s_layer, num_layer)
+
+
+    def forward(self, t_src, s_src):
+        t_psrc = self.pe(t_src)
+        t_out = self.t_tr(t_psrc)
+        t_g = t_out.amax(dim=1)
+
+        s_out = self.s_tr(s_src)
+        s_g = s_out.amax(dim=1)
+
+        out = torch.cat([t_g,s_g], dim=1)    
+        return out
