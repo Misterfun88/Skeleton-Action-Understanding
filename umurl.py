@@ -200,3 +200,34 @@ class UmURL(nn.Module):
         
     def modality_generation(self, data_input, modality='joint'):
         N, C, T, V, M = data_input.shape
+        if modality == 'joint':
+            xt = data_input.permute(0, 2, 4, 3, 1)
+            xt = xt.reshape(N, T, M*V*C)
+            xs = data_input.permute(0, 4, 3, 2, 1)
+            xs = xs.reshape(N, M*V, T*C)
+
+        elif modality == 'bone':
+            bone = torch.zeros_like(data_input)
+            for v1,v2 in self.Bone:
+                bone[:,:,:,v1-1,:] = data_input[:,:,:,v1-1,:] - data_input[:,:,:,v2-1,:]
+                xt = bone.permute(0, 2, 4, 3, 1)
+                xt = xt.reshape(N, T, M*V*C)
+                xs = bone.permute(0, 4, 3, 2, 1)
+                xs = xs.reshape(N, M*V, T*C)
+
+        elif modality == 'motion':
+            motion = torch.zeros_like(data_input) 
+            motion[:,:,:-1,:,:] = data_input[:,:,1:,:,:] - data_input[:,:,:-1,:,:]  
+            xt = motion.permute(0, 2, 4, 3, 1)
+            xt = xt.reshape(N, T, M*V*C)
+            xs = motion.permute(0, 4, 3, 2, 1)
+            xs = xs.reshape(N, M*V, T*C)
+
+        return xt, xs
+      
+
+    def forward(self, data_v1, data_v2, data_v3, data_v4):
+        # We simultaneously model skeleton sequences in both spatial and temporal dimensions.
+        # The spatial input is obtained by directly reshaping the original skeleton sequence. 
+        # The final representation is produced by concatenating the features from both dimensions.
+    
