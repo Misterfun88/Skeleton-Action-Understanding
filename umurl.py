@@ -263,3 +263,26 @@ class Downstream(nn.Module):
         super().__init__()
 
         self.d_model  = 2*hidden_size
+
+        self.backbone = BaseEncoder(
+            t_input_size, s_input_size,
+            hidden_size, num_head, num_layer,
+        )
+
+        # self.fc = nn.Sequential(
+        #             #  nn.BatchNorm1d(self.d_model, affine=False),
+        #              nn.Linear(self.d_model, num_class)
+        #  )
+        
+        self.fc = nn.Linear(self.d_model, num_class)
+   
+
+    def forward(self, jt, js, bt, bs, mt, ms, knn_eval=False):
+        
+        y_u = self.backbone.mm_forward(jt, js, bt, bs, mt, ms)
+
+        if knn_eval: # return last layer features during  KNN evaluation (action retrieval)
+            return y_u
+        else:
+            return self.fc(y_u)
+  
