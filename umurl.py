@@ -231,3 +231,35 @@ class UmURL(nn.Module):
         # The spatial input is obtained by directly reshaping the original skeleton sequence. 
         # The final representation is produced by concatenating the features from both dimensions.
     
+        # uni-modal augmented view
+        jt1, js1 = self.modality_generation(data_v1, 'joint')
+
+        bt2, bs2 = self.modality_generation(data_v2, 'bone')
+
+        mt3, ms3 = self.modality_generation(data_v3, 'motion')
+        
+        # multi-modal augmented view
+        jt4, js4 = self.modality_generation(data_v4, 'joint')
+        bt4, bs4 = self.modality_generation(data_v4, 'bone')
+        mt4, ms4 = self.modality_generation(data_v4, 'motion')
+
+
+        # multi-modal feature encoding
+        y_u = self.backbone.mm_forward(jt4, js4, bt4, bs4, mt4, ms4)
+        # decomposing multi-modal features
+        z_uj, z_ub, z_um = self.j_projector(y_u), self.b_projector(y_u), self.m_projector(y_u)
+
+        # uni-modal feature encoding
+        y_j, y_b, y_m = self.backbone.uni_forward(jt1, js1, bt2, bs2, mt3, ms3)
+        # uni-modal features projection
+        z_j, z_b, z_m = self.j_projector(y_j), self.b_projector(y_b), self.m_projector(y_m)
+
+        return z_j, z_b, z_m, z_uj, z_ub, z_um
+    
+
+class Downstream(nn.Module):
+    def __init__(self, t_input_size, s_input_size, 
+                 hidden_size, num_head, num_layer, num_class=60) -> None:
+        super().__init__()
+
+        self.d_model  = 2*hidden_size
