@@ -162,3 +162,41 @@ class UmURL(nn.Module):
         
         self.backbone = BaseEncoder(
             t_input_size, s_input_size,
+            hidden_size, num_head, num_layer,
+        )
+
+        # joint-aware projector
+        self.j_projector = nn.Sequential(
+                     nn.Linear(self.d_model, self.d_model),
+                     nn.BatchNorm1d(self.d_model),
+                     nn.ReLU(True),
+                     nn.Linear(self.d_model, self.d_model),
+                     nn.BatchNorm1d(self.d_model),
+                     nn.ReLU(True),
+                     nn.Linear(self.d_model, 4096),
+         )
+        
+        # bone-aware projector
+        self.b_projector = nn.Sequential(
+                     nn.Linear(self.d_model, self.d_model),
+                     nn.BatchNorm1d(self.d_model),
+                     nn.ReLU(True),
+                     nn.Linear(self.d_model, self.d_model),
+                     nn.BatchNorm1d(self.d_model),
+                     nn.ReLU(True),
+                     nn.Linear(self.d_model, 4096),
+         )
+         
+        # motion-aware projector
+        self.m_projector = nn.Sequential(
+                     nn.Linear(self.d_model, self.d_model),
+                     nn.BatchNorm1d(self.d_model),
+                     nn.ReLU(True),
+                     nn.Linear(self.d_model, self.d_model),
+                     nn.BatchNorm1d(self.d_model),
+                     nn.ReLU(True),
+                     nn.Linear(self.d_model, 4096),
+         )
+        
+    def modality_generation(self, data_input, modality='joint'):
+        N, C, T, V, M = data_input.shape
