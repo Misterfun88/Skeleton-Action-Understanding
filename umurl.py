@@ -136,3 +136,29 @@ class BaseEncoder(nn.Module):
         bt_src, bs_src = self.b_emb(bt,bs)
         mt_src, ms_src = self.m_emb(mt,ms)
         
+        # multi-modal early fusion
+        mmt = (jt_src + bt_src + mt_src) / 3
+        mms = (js_src + bs_src + ms_src) / 3
+        mmt_src, mms_src = self.mm_fusion(mmt,mms)
+        
+        # encoding
+        y_u = self.ma_encoder(mmt_src,mms_src)
+
+        return y_u
+    
+    
+# unified multi-modal unsupervised representation learning
+class UmURL(nn.Module):
+    def __init__(self, t_input_size, s_input_size, 
+                 hidden_size, num_head, num_layer, num_class=60
+                 ):
+        super(UmURL, self).__init__()
+  
+        self.d_model  = 2*hidden_size
+
+        self.Bone = [(1, 2), (2, 21), (3, 21), (4, 3), (5, 21), (6, 5), (7, 6), (8, 7), (9, 21),
+                     (10, 9), (11, 10), (12, 11), (13, 1), (14, 13), (15, 14), (16, 15), (17, 1),
+                     (18, 17), (19, 18), (20, 19), (21, 21), (22, 23), (23, 8), (24, 25), (25, 12)]
+        
+        self.backbone = BaseEncoder(
+            t_input_size, s_input_size,
