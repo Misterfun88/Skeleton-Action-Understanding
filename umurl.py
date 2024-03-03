@@ -97,3 +97,42 @@ class ST_TR(nn.Module):
 
         out = torch.cat([t_g,s_g], dim=1)    
         return out
+
+class BaseEncoder(nn.Module):
+    def __init__(self, t_input_size, s_input_size, 
+                 hidden_size, num_head, num_layer,
+                 ) -> None:
+        super().__init__()
+
+        # modality-specific embedding
+        self.j_emb = MS_Emb(t_input_size, s_input_size, hidden_size)
+        self.b_emb = MS_Emb(t_input_size, s_input_size, hidden_size)
+        self.m_emb = MS_Emb(t_input_size, s_input_size, hidden_size)
+        
+        # fusion module for diffierent modalities
+        self.mm_fusion = Emb_Fusion(hidden_size, hidden_size, hidden_size)
+        
+        # modality-agnostic encoder
+        self.ma_encoder = ST_TR(hidden_size, num_head, num_layer)
+
+    def uni_forward(self, jt, js, bt, bs, mt, ms):
+        # uni-modal feature extraction
+        # embedding
+        jt_src, js_src = self.j_emb(jt,js)
+        bt_src, bs_src = self.b_emb(bt,bs)
+        mt_src, ms_src = self.m_emb(mt,ms)
+        
+        # encoding
+        y_j = self.ma_encoder(jt_src,js_src)
+        y_b = self.ma_encoder(bt_src,bs_src)
+        y_m = self.ma_encoder(mt_src,ms_src)
+
+        return y_j,y_b,y_m
+
+    def mm_forward(self, jt, js, bt, bs, mt, ms):
+        # multi-modal feature extraction
+        # embedding
+        jt_src, js_src = self.j_emb(jt,js)
+        bt_src, bs_src = self.b_emb(bt,bs)
+        mt_src, ms_src = self.m_emb(mt,ms)
+        
