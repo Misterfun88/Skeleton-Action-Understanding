@@ -7,3 +7,5 @@
 ## Requirements
 
 Instructions for setting up the conda environment. 
+```
+conda create -n umurl python
