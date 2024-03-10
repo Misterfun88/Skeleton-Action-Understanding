@@ -10,4 +10,4 @@ Instructions for setting up the conda environment.
 ```
 conda create -n umurl python=3.9 anaconda
 conda activate umurl
-conda i
+conda install pytorch==1.12.1 torchvisio
