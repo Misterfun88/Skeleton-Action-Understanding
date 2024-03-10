@@ -16,4 +16,4 @@ pip3 install tensorboard
 
 ## Data Preparation
 
-Details o
+Details on the raw data and preprocess
