@@ -8,4 +8,5 @@
 
 Instructions for setting up the conda environment. 
 ```
-conda create -n umurl python
+conda create -n umurl python=3.9 anaconda
+conda act
