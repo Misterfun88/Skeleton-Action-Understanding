@@ -6,4 +6,4 @@
 
 ## Requirements
 
-Instructions for set
+Instructions for setting up the conda environment. 
