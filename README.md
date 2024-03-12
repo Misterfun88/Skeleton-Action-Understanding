@@ -20,4 +20,4 @@ Details on the raw data and preprocessing data can be found within the data and 
 
 ## Pretraining and Evaluation
 
-Detailed information
+Detailed information on pre-training and evaluating 
