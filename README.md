@@ -24,4 +24,4 @@ Detailed information on pre-training and evaluating on the downstream task is wi
 
 ## Pretrained Models
 
-We have released several pre-trained models: [Google Drive
+We have released several pre-trained models: [Google Drive](https://drive.google.co
