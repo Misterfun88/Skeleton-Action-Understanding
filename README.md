@@ -16,4 +16,6 @@ pip3 install tensorboard
 
 ## Data Preparation
 
-Details on the raw data and preprocessing data can be found within the data and data_gen direct
+Details on the raw data and preprocessing data can be found within the data and data_gen directories respectively.
+
+## Pretraining and Eva
