@@ -28,4 +28,4 @@ We have released several pre-trained models: [Google Drive](https://drive.google
 
 ## Visualization
 
-Examples
+Examples of t-SNE visualizations are provided 
