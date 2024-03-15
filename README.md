@@ -34,4 +34,6 @@ Examples of t-SNE visualizations are provided to show the effectiveness of our p
 
 If you find this repository useful, please consider citing our paper:
 
-#
+## Acknowledgements
+
+This work was
