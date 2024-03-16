@@ -36,4 +36,4 @@ If you find this repository useful, please consider citing our paper:
 
 ## Acknowledgements
 
-This work was supported by numerous grant
+This work was supported by numerous grants and funds, the details of which
